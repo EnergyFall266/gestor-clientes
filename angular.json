@@ -23,7 +23,7 @@
               "angular-slickgrid",
               "stream"
             ],
-            "outputPath": "dist/projeto-padrao",
+            "outputPath": "dist/gestor-clientes",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",

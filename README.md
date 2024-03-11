@@ -8,7 +8,7 @@ Realize um git clone do projeto, troque o nome e o title no app.component.
 
 # Troca de nome
 
-Clique no search(Lupa) do vsCode e procure pela palavra "projeto-padrao" e em replace digite o nome do seu projeto, clique no icone "replace all" e confirme. Por fim altere o titulo ProjetoPadrao no index.html.
+Clique no search(Lupa) do vsCode e procure pela palavra "gestor-clientes" e em replace digite o nome do seu projeto, clique no icone "replace all" e confirme. Por fim altere o titulo ProjetoPadrao no index.html.
 
 ## Dark Mode
 
@@ -225,7 +225,7 @@ Renomeie a pasta, mude o nome do projeto no package.json e no angular.json mude 
 
 ```json
 "build": {
-            "outputPath": "dist/projeto-padrao",
+            "outputPath": "dist/gestor-clientes",
 }
 ```
 
