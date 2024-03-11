@@ -1,50 +1,71 @@
-<div class="grid h-screen w-screen p-0 m-0 flex flex-nowrap ">
-    <div class="col-2 flex flex-column mt-5 ml-3 mr-3 p-0  ">
-      <div class="mb-3">
-        <p-image
-          class="flex-initial justify-content-center"
-          src="../assets/images/logo-prisma.jpg"
-          alt="Image"
-          width="250"
-        ></p-image>
+<div >
+  <p-sidebar
+    [(visible)]="sidebarVisible"
+    [dismissible]="screenWidth <= 900 ? true : false"
+    [showCloseIcon]="false"
+    [modal]="screenWidth <= 900 ? true : false"
+  >
+    <ng-template pTemplate="header">
+      <div class="w-9">
+        <p-image src="assets/images/logo-prisma.jpg" width="100%" />
       </div>
-      <div class="flex flex-column gap-8">
-        <div class="">
-          <h4 class="bg-blue-300 mb-3 border-round-sm w-17rem pl-1 py-1">Gestor Comercial Responsável:</h4>
-  
-          <!-- <p-dropdown
-          class="flex"
+    </ng-template>
+
+    <ng-template pTemplate="content">
+      <div class="flex flex-column" >
+        <div>
+          <h4 class="bg-blue-300 mb-3 border-round-sm w-15rem pl-1 py-1">
+            Gestor Comercial Responsável:
+          </h4>
+
+          <p-dropdown
             [style]="{ width: '17rem' }"
-            [options]="cities"
-            [(ngModel)]="selectedCity"
-            optionLabel="name"
+            [options]="gestores"
+            [(ngModel)]="gestorSelecionado"
             [showClear]="true"
             placeholder="Selecione o Gestor"
             (onChange)="print()"
-  
-          ></p-dropdown> -->
+          ></p-dropdown>
         </div>
-        <div class="">
-          <h4 class="bg-blue-300 mb-3 w-5rem border-round-sm pl-1 py-1">Cliente:</h4>
-  
-          <!-- <p-dropdown
-          class="flex"
+        <div>
+          <h4 class="bg-blue-300 mb-3 w-4rem border-round-sm pl-1 py-1">
+            Cliente:
+          </h4>
+
+          <p-dropdown
+            class="flex"
             [style]="{ width: '17rem' }"
-            [options]="cities"
-            [(ngModel)]="selectedCity"
-            optionLabel="name"
+            [options]="gestores"
+            [(ngModel)]="gestorSelecionado"
             [showClear]="true"
             placeholder="Selecione o Cliente"
             (onChange)="print()"
-          ></p-dropdown> -->
+          ></p-dropdown>
         </div>
       </div>
-    </div>
-    <div class="col-1 p-0 w-1rem">
-      <p-divider layout="vertical" class="h-screen flex"></p-divider>
-    </div>
-    <div class="col">
-      <app-dados-clientes></app-dados-clientes>
-    </div>
-  </div>
-  
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <div class="flex justify-content-center">
+        <div class="card flex justify-content-center">
+          <p-toast></p-toast>
+          <ng-template #upload>
+            <p-fileUpload
+            mode="basic"
+            chooseLabel="Upload"
+            chooseIcon="pi pi-upload"
+            name="CLIENTES X MODULOS SENIOR"
+            url="https://www.primefaces.org/cdn/api/upload.php"
+            [auto]="true"
+            accept="image/*"
+            (onUpload)="onUpload($event)"
+            ></p-fileUpload>
+          </ng-template>
+          <p-button label="Subindo" [loading]="loading" *ngIf="loading; else upload"></p-button>
+        </div>
+      </div>
+    </ng-template>
+  </p-sidebar>
+</div>
+
+
+

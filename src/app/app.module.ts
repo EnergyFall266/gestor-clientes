@@ -32,6 +32,9 @@ import { DadosClientesComponent } from './dados-clientes/dados-clientes.componen
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DividerModule } from 'primeng/divider';
 import { ImageModule } from 'primeng/image';
+import { SidebarModule } from 'primeng/sidebar';
+import { ToastModule } from 'primeng/toast';
+
 export const HttpLoaderFactory = (httpClient: HttpClient) =>
   new TranslateHttpLoader(httpClient, 'assets/i18n/');
 
@@ -67,6 +70,8 @@ export const HttpLoaderFactory = (httpClient: HttpClient) =>
     RadioButtonModule,
     DividerModule,
     ImageModule,
+    SidebarModule,
+    ToastModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

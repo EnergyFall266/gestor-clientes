@@ -1,35 +1,47 @@
 import { Component, Input } from '@angular/core';
 import { VP_BPM } from 'src/beans/VP_BPM';
-interface City {
-  name: string;
-  code: string;
+import { MessageService } from 'primeng/api';
+
+interface UploadEvent {
+  originalEvent: Event;
+  files: File[];
 }
+
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss'],
+  providers: [MessageService],
 })
-
-
 export class SidebarComponent {
   @Input() vp!: VP_BPM;
+  sidebarVisible: boolean = true;
+  screenWidth: number = window.innerWidth;
+  gestores: string[] = [
+    'William Germano Meurer',
+    'Rodrigo José Alves Maioli',
+    'Alberto de Lima',
+    'Everson Godoy Freire ',
+  ];
+  gestorSelecionado: string = '';
+  loading: boolean = false;
 
-  cities: City[] | undefined;
+  ngOnInit() {}
 
-  selectedCity: City | undefined;
+  constructor(private messageService: MessageService) {}
 
-  ngOnInit() {
-    this.cities = [
-      { name: 'New York', code: 'NY' },
-      { name: 'Rome', code: 'RM' },
-      { name: 'London', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' },
-    ];
+  onUpload(event: UploadEvent) {
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+    }
+    , 3000);
+      this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Planilha enviada' , life: 3000});
+      
   }
 
   print() {
-    console.log(this.selectedCity);
+    console.log(this.gestorSelecionado);
   }
 }
