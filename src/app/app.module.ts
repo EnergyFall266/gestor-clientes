@@ -21,42 +21,25 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { PanelModule } from 'primeng/panel';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { MenuModule } from 'primeng/menu';
-import { T1ExemplosComponent } from './exemplos/t1-exemplos/t1-exemplos.component';
-import { T1C1Component } from './exemplos/t1-exemplos/t1-c1/t1-c1.component';
-import { T1C2Component } from './exemplos/t1-exemplos/t1-c2/t1-c2.component';
-import { T1C3Component } from './exemplos/t1-exemplos/t1-c3/t1-c3.component';
 import { TabMenuModule } from 'primeng/tabmenu';
-import { T2ExemplosComponent } from './exemplos/t2-exemplos/t2-exemplos.component';
-import { T3ExemplosComponent } from './exemplos/t3-exemplos/t3-exemplos.component';
-import { T4ExemplosComponent } from './exemplos/t4-exemplos/t4-exemplos.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { T3Painel1Component } from './exemplos/t3-exemplos/t3-painel1/t3-painel1.component';
-import { T3Painel2Component } from './exemplos/t3-exemplos/t3-painel2/t3-painel2.component';
-import { T3Painel3Component } from './exemplos/t3-exemplos/t3-painel3/t3-painel3.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { ExemplosComponent } from './exemplos/exemplos.component';
 import { AnexoService, PastaService } from './app.service';
 import { Validate_Service } from 'src/services/Validate_Service';
-
+import { DadosClientesComponent } from './dados-clientes/dados-clientes.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { DividerModule } from 'primeng/divider';
+import { ImageModule } from 'primeng/image';
 export const HttpLoaderFactory = (httpClient: HttpClient) =>
   new TranslateHttpLoader(httpClient, 'assets/i18n/');
 
 @NgModule({
   declarations: [
     AppComponent,
-    T1ExemplosComponent,
-    T1C1Component,
-    T1C2Component,
-    T1C3Component,
-    T2ExemplosComponent,
-    T3ExemplosComponent,
-    T4ExemplosComponent,
-    T3Painel1Component,
-    T3Painel2Component,
-    T3Painel3Component,
-    ExemplosComponent,
+    DadosClientesComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -82,6 +65,8 @@ export const HttpLoaderFactory = (httpClient: HttpClient) =>
     ProgressSpinnerModule,
     FileUploadModule,
     RadioButtonModule,
+    DividerModule,
+    ImageModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

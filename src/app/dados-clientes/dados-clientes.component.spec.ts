@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { T3Painel2Component } from './t3-painel2.component';
+import { DadosClientesComponent } from './dados-clientes.component';
 
-describe('T3Painel2Component', () => {
-  let component: T3Painel2Component;
-  let fixture: ComponentFixture<T3Painel2Component>;
+describe('DadosClientesComponent', () => {
+  let component: DadosClientesComponent;
+  let fixture: ComponentFixture<DadosClientesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ T3Painel2Component ]
+      declarations: [ DadosClientesComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(T3Painel2Component);
+    fixture = TestBed.createComponent(DadosClientesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

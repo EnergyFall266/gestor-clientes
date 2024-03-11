@@ -1,0 +1,50 @@
+<div class="grid h-screen w-screen p-0 m-0 flex flex-nowrap ">
+    <div class="col-2 flex flex-column mt-5 ml-3 mr-3 p-0  ">
+      <div class="mb-3">
+        <p-image
+          class="flex-initial justify-content-center"
+          src="../assets/images/logo-prisma.jpg"
+          alt="Image"
+          width="250"
+        ></p-image>
+      </div>
+      <div class="flex flex-column gap-8">
+        <div class="">
+          <h4 class="bg-blue-300 mb-3 border-round-sm w-17rem pl-1 py-1">Gestor Comercial Responsável:</h4>
+  
+          <!-- <p-dropdown
+          class="flex"
+            [style]="{ width: '17rem' }"
+            [options]="cities"
+            [(ngModel)]="selectedCity"
+            optionLabel="name"
+            [showClear]="true"
+            placeholder="Selecione o Gestor"
+            (onChange)="print()"
+  
+          ></p-dropdown> -->
+        </div>
+        <div class="">
+          <h4 class="bg-blue-300 mb-3 w-5rem border-round-sm pl-1 py-1">Cliente:</h4>
+  
+          <!-- <p-dropdown
+          class="flex"
+            [style]="{ width: '17rem' }"
+            [options]="cities"
+            [(ngModel)]="selectedCity"
+            optionLabel="name"
+            [showClear]="true"
+            placeholder="Selecione o Cliente"
+            (onChange)="print()"
+          ></p-dropdown> -->
+        </div>
+      </div>
+    </div>
+    <div class="col-1 p-0 w-1rem">
+      <p-divider layout="vertical" class="h-screen flex"></p-divider>
+    </div>
+    <div class="col">
+      <app-dados-clientes></app-dados-clientes>
+    </div>
+  </div>
+  
