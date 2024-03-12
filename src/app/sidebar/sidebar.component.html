@@ -1,9 +1,9 @@
-<div >
+<div>
   <p-sidebar
     [(visible)]="sidebarVisible"
     [dismissible]="screenWidth <= 900 ? true : false"
     [showCloseIcon]="false"
-    [modal]="screenWidth <= 900 ? true : false"
+    [modal]="false"
   >
     <ng-template pTemplate="header">
       <div class="w-9">
@@ -12,11 +12,11 @@
     </ng-template>
 
     <ng-template pTemplate="content">
-      <div class="flex flex-column" >
+      <div class="flex flex-column">
         <div>
-          <h4 class="bg-blue-300 mb-3 border-round-sm w-15rem pl-1 py-1">
+          <p class="background mb-3 border-round-sm w-15rem pl-1 py-1">
             Gestor Comercial Responsável:
-          </h4>
+          </p>
 
           <p-dropdown
             [style]="{ width: '17rem' }"
@@ -28,9 +28,9 @@
           ></p-dropdown>
         </div>
         <div>
-          <h4 class="bg-blue-300 mb-3 w-4rem border-round-sm pl-1 py-1">
+          <p class="mb-3 w-4rem border-round-sm pl-1 py-1 background">
             Cliente:
-          </h4>
+          </p>
 
           <p-dropdown
             class="flex"
@@ -50,22 +50,23 @@
           <p-toast></p-toast>
           <ng-template #upload>
             <p-fileUpload
-            mode="basic"
-            chooseLabel="Upload"
-            chooseIcon="pi pi-upload"
-            name="CLIENTES X MODULOS SENIOR"
-            url="https://www.primefaces.org/cdn/api/upload.php"
-            [auto]="true"
-            accept="image/*"
-            (onUpload)="onUpload($event)"
+              mode="basic"
+              chooseLabel="Upload"
+              chooseIcon="pi pi-upload"
+              name="CLIENTES X MODULOS SENIOR"
+              url="https://www.primefaces.org/cdn/api/upload.php"
+              [auto]="true"
+              accept="image/*"
+              (onUpload)="onUpload($event)"
             ></p-fileUpload>
           </ng-template>
-          <p-button label="Subindo" [loading]="loading" *ngIf="loading; else upload"></p-button>
+          <p-button
+            label="Subindo"
+            [loading]="loading"
+            *ngIf="loading; else upload"
+          ></p-button>
         </div>
       </div>
     </ng-template>
   </p-sidebar>
 </div>
-
-
-

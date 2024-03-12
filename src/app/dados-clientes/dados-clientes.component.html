@@ -1,1 +1,36 @@
-<p>dados-clientes works!</p>
+<div style="margin-left: 340px" class="overflow-x-hidden">
+  <div class="flex justify-content-center">
+    <h1>Clientes</h1>
+  </div>
+  <div>
+    <p-accordion [multiple]="true" >
+        
+        <p-accordionTab  header="{{cliente.nome}}" *ngFor="let cliente of clientes">
+            <div>
+
+                <p-table  [value]="cliente.dados" >
+                    <ng-template pTemplate="header" >
+                        <tr>
+                            <th >modulo</th>
+                            <th >valor</th>
+                            <th >data</th>
+                            <th >status</th>
+                            <th >acoes</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body"  let-columns>
+                        <tr>
+                            <td >{{columns.modulo}}</td>
+                            <td >{{columns.valor}}</td>
+                            <td >{{columns.data}}</td>
+                            <td >{{columns.status}}</td>
+                            <td>{{columns.acoes}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </p-accordionTab>
+        
+    </p-accordion>
+  </div>
+</div>

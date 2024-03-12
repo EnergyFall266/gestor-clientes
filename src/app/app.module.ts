@@ -34,6 +34,7 @@ import { DividerModule } from 'primeng/divider';
 import { ImageModule } from 'primeng/image';
 import { SidebarModule } from 'primeng/sidebar';
 import { ToastModule } from 'primeng/toast';
+import { AccordionModule } from 'primeng/accordion';
 
 export const HttpLoaderFactory = (httpClient: HttpClient) =>
   new TranslateHttpLoader(httpClient, 'assets/i18n/');
@@ -72,6 +73,7 @@ export const HttpLoaderFactory = (httpClient: HttpClient) =>
     ImageModule,
     SidebarModule,
     ToastModule,
+    AccordionModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
