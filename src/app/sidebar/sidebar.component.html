@@ -7,14 +7,14 @@
   >
     <ng-template pTemplate="header">
       <div class="w-9">
-        <p-image src="assets/images/logo-prisma.jpg" width="100%" />
+        <p-image src="assets/images/logo-prisma.jpg" width="100%" class="cursor-pointer" (click)="print()"/>
       </div>
     </ng-template>
 
     <ng-template pTemplate="content">
       <div class="flex flex-column">
         <div>
-          <p class="background mb-3 border-round-sm w-15rem pl-1 py-1">
+          <p class="background mb-3 border-round-sm w-16rem flex justify-content-center py-1">
             Gestor Comercial Responsável:
           </p>
 
@@ -28,19 +28,34 @@
           ></p-dropdown>
         </div>
         <div>
-          <p class="mb-3 w-4rem border-round-sm pl-1 py-1 background">
+          <p class="mb-3 flex justify-content-center w-5rem border-round-sm  py-1 background">
             Cliente:
           </p>
 
           <p-dropdown
-            class="flex"
+           
             [style]="{ width: '17rem' }"
             [options]="gestores"
-            [(ngModel)]="gestorSelecionado"
+            [(ngModel)]="clienteSelecionado"
             [showClear]="true"
             placeholder="Selecione o Cliente"
             (onChange)="print()"
           ></p-dropdown>
+        </div>
+        <div >
+          <p class="mb-3 flex justify-content-center w-5rem border-round-sm  py-1 background">
+            Módulo:
+          </p>
+          <div class="p-inputgroup " style="width: 17rem;">
+            <input type="text" pInputText [(ngModel)]="modulo"  />
+            <button
+              type="button"
+              pButton
+              icon="pi pi-search"
+              styleClass="p-button-warn"
+              (click)="print()"
+            ></button>
+          </div>
         </div>
       </div>
     </ng-template>

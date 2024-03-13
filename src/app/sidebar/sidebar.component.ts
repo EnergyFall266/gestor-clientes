@@ -25,7 +25,9 @@ export class SidebarComponent {
     'Everson Godoy Freire ',
   ];
   gestorSelecionado: string = '';
+  clienteSelecionado: string = '';
   loading: boolean = false;
+  modulo: string = '';
 
   ngOnInit() {}
 

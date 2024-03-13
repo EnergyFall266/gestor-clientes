@@ -24,7 +24,7 @@
     "axios": "^1.2.1",
     "primeflex": "^3.2.1",
     "primeicons": "^6.0.1",
-    "primeng": "15.3.0",
+    "primeng": "^15.4.1",
     "prisma_prismafunctions": "^1.2.1",
     "rxjs": "~7.5.0",
     "stream-browserify": "^3.0.0",
