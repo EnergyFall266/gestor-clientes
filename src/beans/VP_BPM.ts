@@ -22,6 +22,7 @@ export class AnexoFile {
 export class VP_BPM {
   public overlay: boolean = true;
   public Buscando_WS: boolean = true;
+  public dadosClientes:any[] = [];
 
   public alertas: Message[] = [];
 

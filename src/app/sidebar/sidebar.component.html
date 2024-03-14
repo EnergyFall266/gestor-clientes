@@ -7,7 +7,7 @@
   >
     <ng-template pTemplate="header">
       <div class="w-9">
-        <p-image src="assets/images/logo-prisma.jpg" width="100%" class="cursor-pointer" (click)="print()"/>
+        <p-image src="assets/images/logo-prisma.jpg" width="100%" class="cursor-pointer" (click)="refresh()"/>
       </div>
     </ng-template>
 
@@ -47,7 +47,7 @@
             Módulo:
           </p>
           <div class="p-inputgroup " style="width: 17rem;">
-            <input type="text" pInputText [(ngModel)]="modulo"  />
+            <input type="text" pInputText [(ngModel)]="modulo"  (keydown.enter)="print()"/>
             <button
               type="button"
               pButton

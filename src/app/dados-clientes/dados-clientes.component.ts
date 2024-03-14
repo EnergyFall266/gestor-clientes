@@ -25,7 +25,7 @@ export class DadosClientesComponent {
       nome: 'João',
       dados: [
         {modulo: 'Módulo 1', valor: 'Valor 1', data: 'Data 1', status: 'Status 1', acoes: 'Ações 1'},
-        {modulo: 'Módulo 2', valor: 'Valor 2', data: 'Data 2', status: 'Status 2', acoes: 'Ações 2'},
+        {modulo: 'Módjwdfkijvglswegfklns fkljdsdnfkbgkulo 2', valor: 'Valor gykjugykjgkygyigyuglo', data: 'Data 2', status: 'hkugklughkluhçliihuiçlhkçlihohçuh 2', acoes: 'Açõe54164562.614.564.614.651456156s 2'},
         {modulo: 'Módulo 3', valor: 'Valor 3', data: 'Data 3', status: 'Status 3', acoes: 'Ações 3'},
       ]
     },
@@ -56,7 +56,8 @@ export class DadosClientesComponent {
   ];
   
   
-
-
+reload(){
+  window.location.reload();
+}
 
 }
