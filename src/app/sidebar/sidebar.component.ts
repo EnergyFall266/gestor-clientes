@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { VP_BPM } from 'src/beans/VP_BPM';
 import { MessageService } from 'primeng/api';
-import { DadosClientesComponent} from '../dados-clientes/dados-clientes.component';
+import { DadosClientesComponent } from '../dados-clientes/dados-clientes.component';
+import { DataService } from '../data.service';
 interface UploadEvent {
   originalEvent: Event;
   files: File[];
 }
-
 
 @Component({
   selector: 'app-sidebar',
@@ -16,6 +16,7 @@ interface UploadEvent {
 })
 export class SidebarComponent {
   @Input() vp!: VP_BPM;
+
   sidebarVisible: boolean = true;
   screenWidth: number = window.innerWidth;
   gestores: string[] = [
@@ -29,19 +30,37 @@ export class SidebarComponent {
   loading: boolean = false;
   modulo: string = '';
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getData();
+  }
 
-  constructor(private messageService: MessageService, private dadosCliente: DadosClientesComponent) {}
+  constructor(
+    private messageService: MessageService,
+    private dadosCliente: DadosClientesComponent,
+    private dataService: DataService
+  ) {}
 
+  async getData() {
+    let data = await this.dataService.getData();
+    console.log(data);
+
+    data.Clientes.forEach((cliente: any) => {
+      console.log(cliente);
+     
+        
+    });
+  }
   onUpload(event: UploadEvent) {
     this.loading = true;
     setTimeout(() => {
       this.loading = false;
-      this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Planilha enviada' , life: 3000});
-    }
-    , 3000);
-      
-      
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Sucesso',
+        detail: 'Planilha enviada',
+        life: 3000,
+      });
+    }, 3000);
   }
 
   print() {
@@ -51,10 +70,13 @@ export class SidebarComponent {
       this.vp.Buscando_WS = false;
     }, 3000);
   }
-  refresh(){
+  refresh() {
     console.log('refresh');
-    
-    this.dadosCliente.reload();
-  }
+    let dados: any = this.vp.dadosClientes;
+    dados.forEach((cliente: any) => {
+      console.log(cliente);
+    });
 
+    // this.dadosCliente.reload();
+  }
 }

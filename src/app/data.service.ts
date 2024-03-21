@@ -20,7 +20,6 @@ let config = {
 
 try {
   const response = await axios.request(config);
-  console.log(response);
 
   return response.data;
 } catch (error: any) {

@@ -56,6 +56,10 @@ export class DadosClientesComponent {
   ];
   
   
+ngOnInit() {
+  
+}
+
 reload(){
   window.location.reload();
 }

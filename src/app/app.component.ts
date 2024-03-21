@@ -25,12 +25,7 @@ export class AppComponent {
   @ViewChild(Messages) msg!: Messages;
   public title = 'ProjetoPadrao';
 
-  checked: boolean = false;
-
-  public menus: MenuItem[] = fd.Menus;
-  public activeMenu: MenuItem = {};
-  public panel = fd.Panels;
-  public hideButtons: boolean = false;
+  
 
   public vp: VP_BPM = new VP_BPM();
 
@@ -39,12 +34,9 @@ export class AppComponent {
 
   }
   ngOnInit() {
-this.getData();
+
   
   }
 
-  async getData() {
-    const data = await this.dataService.getData();
-    console.log(data);
-  }
+ 
 }
