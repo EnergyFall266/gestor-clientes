@@ -14,7 +14,7 @@ async getData() {
 let config = {
   method: 'get',
   maxBodyLength: Infinity,
-  url: 'http://192.168.1.21:3000/dados-clientes',
+  url: 'http://localhost:3000/dados-clientes',
   headers: { }
 };
 

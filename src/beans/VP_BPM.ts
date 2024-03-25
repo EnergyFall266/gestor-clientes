@@ -9,6 +9,19 @@ export interface ResponseLoadData {
   vp: VP_BPM;
 }
 
+interface dadosClientes {
+  nome: string;
+  gestor: string;
+ dados:dados[];
+}
+interface dados {
+  linhaDeProduto: string;
+  modulo: string;
+  familia: string;
+  nota: string;
+  mes: string;
+  }
+
 export class AnexoFile {
   file: File;
   bytes: ArrayBuffer;
@@ -22,7 +35,7 @@ export class AnexoFile {
 export class VP_BPM {
   public overlay: boolean = true;
   public Buscando_WS: boolean = true;
-  public dadosClientes:any[] = [];
+  public dadosClientes:dadosClientes[] = [];
 
   public alertas: Message[] = [];
 

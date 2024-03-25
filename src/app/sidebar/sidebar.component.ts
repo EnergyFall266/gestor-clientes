@@ -7,6 +7,9 @@ interface UploadEvent {
   originalEvent: Event;
   files: File[];
 }
+interface clientes {
+  nome: string;
+}
 
 @Component({
   selector: 'app-sidebar',
@@ -19,16 +22,13 @@ export class SidebarComponent {
 
   sidebarVisible: boolean = true;
   screenWidth: number = window.innerWidth;
-  gestores: string[] = [
-    'William Germano Meurer',
-    'Rodrigo José Alves Maioli',
-    'Alberto de Lima',
-    'Everson Godoy Freire ',
-  ];
+  gestores: string[] = [];
+  clientes: clientes[] = [];
   gestorSelecionado: string = '';
   clienteSelecionado: string = '';
   loading: boolean = false;
   modulo: string = '';
+  linhaProduto:any[] = [];
 
   ngOnInit() {
     this.getData();
@@ -45,10 +45,41 @@ export class SidebarComponent {
     console.log(data);
 
     data.Clientes.forEach((cliente: any) => {
-      console.log(cliente);
+      if (!this.gestores.includes(cliente.gestor)) {
+        this.gestores.push(cliente.gestor);
+      }
+
+      if (!this.clientes.includes(cliente.nome)) {
+        this.clientes.push({ nome: cliente.nome });
+      }
+
+
      
-        
+    //  cliente.dados.forEach((dado: any) => {
+
+    //   this.vp.dadosClientes.push({
+    //     nome: cliente.nome,
+    //     gestor: cliente.gestor,
+    //     dados: [
+    //       {
+    //         linhaDeProduto: dado.linhaDeProduto,
+    //         modulo: dado.modulo,
+    //         familia: dado.familia,
+    //         nota: dado.nota,
+    //         mes: dado.mes,
+    //       },
+    //     ],
+    //   });
+    //  });
+      
+
+
+      
     });
+    console.log(this.vp.dadosClientes);
+
+    console.log(this.gestores);
+    console.log(this.clientes);
   }
   onUpload(event: UploadEvent) {
     this.loading = true;
@@ -63,8 +94,24 @@ export class SidebarComponent {
     }, 3000);
   }
 
-  print() {
+  pesquisaGestor() {
     console.log(this.gestorSelecionado);
+    this.vp.Buscando_WS = true;
+    setTimeout(() => {
+      this.vp.Buscando_WS = false;
+    }, 3000);
+  }
+
+  pesquisaCliente() {
+    console.log(this.clienteSelecionado);
+    this.vp.Buscando_WS = true;
+    setTimeout(() => {
+      this.vp.Buscando_WS = false;
+    }, 3000);
+  }
+
+  pesquisaModulo() {
+    console.log(this.modulo);
     this.vp.Buscando_WS = true;
     setTimeout(() => {
       this.vp.Buscando_WS = false;
@@ -77,6 +124,6 @@ export class SidebarComponent {
       console.log(cliente);
     });
 
-    // this.dadosCliente.reload();
+    this.dadosCliente.reload();
   }
 }

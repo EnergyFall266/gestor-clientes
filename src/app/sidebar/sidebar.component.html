@@ -24,7 +24,7 @@
             [(ngModel)]="gestorSelecionado"
             [showClear]="true"
             placeholder="Selecione o Gestor"
-            (onChange)="print()"
+            (onChange)="pesquisaGestor()"
           ></p-dropdown>
         </div>
         <div>
@@ -35,11 +35,16 @@
           <p-dropdown
            
             [style]="{ width: '17rem' }"
-            [options]="gestores"
+            [options]="clientes"
+            optionLabel="nome"
+            optionValue="nome"
             [(ngModel)]="clienteSelecionado"
             [showClear]="true"
+            [filter]="true"
+            filterBy="nome"
             placeholder="Selecione o Cliente"
-            (onChange)="print()"
+            (onChange)="pesquisaCliente()"
+       
           ></p-dropdown>
         </div>
         <div >
@@ -47,13 +52,13 @@
             Módulo:
           </p>
           <div class="p-inputgroup " style="width: 17rem;">
-            <input type="text" pInputText [(ngModel)]="modulo"  (keydown.enter)="print()"/>
+            <input type="text" pInputText [(ngModel)]="modulo"  (keydown.enter)="pesquisaModulo()"/>
             <button
               type="button"
               pButton
               icon="pi pi-search"
               styleClass="p-button-warn"
-              (click)="print()"
+              (click)="pesquisaModulo()"
             ></button>
           </div>
         </div>
