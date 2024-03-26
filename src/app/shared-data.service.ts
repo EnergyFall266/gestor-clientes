@@ -7,11 +7,11 @@ export class SharedDataService {
 getorCliente: any[] = [];
   constructor() { }
 
-setFilteredDataGestor(data: any): void{
+setFilteredData(data: any): void{
   this.getorCliente = data;
   
 }
-getFilteredDataGestor(): any[]{
+getFilteredData(): any[]{
   console.log(this.getorCliente);
   return this.getorCliente;
 }

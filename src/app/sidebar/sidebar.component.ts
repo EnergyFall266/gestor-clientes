@@ -40,6 +40,7 @@ export class SidebarComponent {
   teste: dados[] = [];
 
   ngOnInit() {
+    this.vp.Buscando_WS = true;
     this.getData();
   }
 
@@ -88,8 +89,8 @@ export class SidebarComponent {
       // console.log(cliente.dados);
     });
     console.log(this.vp.dadosClientes);
-    this.sharedDataService.setFilteredDataGestor(this.vp.dadosClientes);
-
+    this.sharedDataService.setFilteredData(this.vp.dadosClientes);
+    this.vp.Buscando_WS = false;
     // console.log(this.gestores);
     // console.log(this.clientes);
   }
@@ -107,32 +108,36 @@ export class SidebarComponent {
   }
 
   pesquisaGestor() {
+    this.vp.Buscando_WS = true;
     console.log(this.gestorSelecionado);
-    // this.vp.Buscando_WS = true;
-    // setTimeout(() => {
-    //   this.vp.Buscando_WS = false;
-    // }, 3000);
+   
     let dados: any = this.vp.dadosClientes;
     let dadosFiltrados = dados.filter(
       (cliente: any) => cliente.gestor === this.gestorSelecionado
     );
-    this.sharedDataService.setFilteredDataGestor(dadosFiltrados);
+    this.sharedDataService.setFilteredData(dadosFiltrados);
     console.log(dadosFiltrados);
-    this.dadosCliente.atualizar(dadosFiltrados);
+     this.clienteSelecionado = '';
+    setTimeout(() => {
+      this.vp.Buscando_WS = false;
+    }, 100);
+    
   }
 
   pesquisaCliente() {
+    this.vp.Buscando_WS = true;
     let dados: any = this.vp.dadosClientes;
     let dadosFiltrados = dados.filter(
       (cliente: any) => cliente.nome === this.clienteSelecionado
     );
     console.log(dadosFiltrados);
 
-    console.log(this.clienteSelecionado);
-    this.vp.Buscando_WS = true;
+    this.sharedDataService.setFilteredData(dadosFiltrados);
+    console.log(dadosFiltrados);
+     this.gestorSelecionado = '';
     setTimeout(() => {
       this.vp.Buscando_WS = false;
-    }, 3000);
+    }, 100);
   }
 
   pesquisaModulo() {

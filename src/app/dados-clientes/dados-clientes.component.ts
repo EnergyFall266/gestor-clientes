@@ -2,11 +2,10 @@ import { Component, Input } from '@angular/core';
 import { VP_BPM } from 'src/beans/VP_BPM';
 import { SharedDataService } from '../shared-data.service';
 
-
 interface clientes {
   nome: string;
   gestor: string;
- dados:dados[];
+  dados: dados[];
 }
 interface dados {
   linhaDeProduto: string;
@@ -14,34 +13,26 @@ interface dados {
   familia: string;
   nota: string;
   mes: string;
-  }
+}
 
 @Component({
   selector: 'app-dados-clientes',
   templateUrl: './dados-clientes.component.html',
   styleUrls: ['./dados-clientes.component.scss'],
-
 })
 export class DadosClientesComponent {
   @Input() vp!: VP_BPM;
- clientes: clientes[] = []
+  clientes: clientes[] = [];
 
-constructor(private sharedDataService: SharedDataService) { }
-  
-ngOnInit() {
-  this.clientes = this.vp.dadosClientes;
-  console.log(this.clientes);
-  
-  
-}
-atualizar(dados: any){
-  this.clientes = dados
-  this.ngOnInit();
-  console.log(this.clientes);
-}
+  constructor(private sharedDataService: SharedDataService) {}
 
-reload(){
-  window.location.reload();
-}
+  ngOnInit() {
+    this.clientes = this.sharedDataService.getFilteredData();
+    console.log(this.clientes);
+  }
 
+
+  reload() {
+    window.location.reload();
+  }
 }

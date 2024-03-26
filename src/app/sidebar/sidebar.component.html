@@ -22,7 +22,6 @@
             [style]="{ width: '17rem' }"
             [options]="gestores"
             [(ngModel)]="gestorSelecionado"
-            [showClear]="true"
             placeholder="Selecione o Gestor"
             (onChange)="pesquisaGestor()"
           ></p-dropdown>
@@ -39,7 +38,6 @@
             optionLabel="nome"
             optionValue="nome"
             [(ngModel)]="clienteSelecionado"
-            [showClear]="true"
             [filter]="true"
             filterBy="nome"
             placeholder="Selecione o Cliente"
