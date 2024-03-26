@@ -6,18 +6,30 @@
   <div>
     <p-accordion [multiple]="true">
       <p-accordionTab
-        header="{{ cliente.nome }}"
+        header="{{ cliente.nome }} --- Gestor Comercial: {{ cliente.gestor }}"
         *ngFor="let cliente of clientes"
       >
         <div>
           <p-table [value]="cliente.dados">
             <ng-template pTemplate="header">
               <tr>
-                <th pSortableColumn="linhaDeProduto">Linha de Produto<p-sortIcon field="linhaDeProduto"></p-sortIcon></th>
-                <th pSortableColumn="modulo">Módulo<p-sortIcon field="modulo"></p-sortIcon></th>
-                <th pSortableColumn="familia">Família<p-sortIcon field="familia"></p-sortIcon></th>
-                <th pSortableColumn="nota">Nota<p-sortIcon field="nota"></p-sortIcon></th>
-                <th pSortableColumn="mes">Mês<p-sortIcon field="mes"></p-sortIcon></th>
+                <th pSortableColumn="linhaDeProduto">
+                  Linha de Produto<p-sortIcon
+                    field="linhaDeProduto"
+                  ></p-sortIcon>
+                </th>
+                <th pSortableColumn="modulo">
+                  Módulo<p-sortIcon field="modulo"></p-sortIcon>
+                </th>
+                <th pSortableColumn="familia">
+                  Família<p-sortIcon field="familia"></p-sortIcon>
+                </th>
+                <th pSortableColumn="nota">
+                  Nota<p-sortIcon field="nota"></p-sortIcon>
+                </th>
+                <th pSortableColumn="mes">
+                  Mês<p-sortIcon field="mes"></p-sortIcon>
+                </th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-columns>

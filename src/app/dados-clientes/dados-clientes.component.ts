@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { VP_BPM } from 'src/beans/VP_BPM';
+import { SharedDataService } from '../shared-data.service';
 
 
 interface clientes {
@@ -24,15 +25,19 @@ interface dados {
 export class DadosClientesComponent {
   @Input() vp!: VP_BPM;
  clientes: clientes[] = []
- dados: any[] = []
 
-
+constructor(private sharedDataService: SharedDataService) { }
   
 ngOnInit() {
   this.clientes = this.vp.dadosClientes;
-  // console.log(this.clientes);
+  console.log(this.clientes);
   
   
+}
+atualizar(dados: any){
+  this.clientes = dados
+  this.ngOnInit();
+  console.log(this.clientes);
 }
 
 reload(){
