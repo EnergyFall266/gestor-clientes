@@ -30,7 +30,7 @@ export class DadosClientesComponent {
   
 ngOnInit() {
   this.clientes = this.vp.dadosClientes;
-  console.log(this.clientes);
+  // console.log(this.clientes);
   
   
 }

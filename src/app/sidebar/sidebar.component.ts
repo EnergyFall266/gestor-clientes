@@ -10,6 +10,13 @@ interface UploadEvent {
 interface clientes {
   nome: string;
 }
+interface dados {
+  linhaDeProduto: string;
+  modulo: string;
+  familia: string;
+  nota: string;
+  mes: string;
+}
 
 @Component({
   selector: 'app-sidebar',
@@ -29,6 +36,7 @@ export class SidebarComponent {
   loading: boolean = false;
   modulo: string = '';
   linhaProduto:any[] = [];
+  teste:dados[] = [];
 
   ngOnInit() {
     this.getData();
@@ -54,32 +62,38 @@ export class SidebarComponent {
       }
 
 
-     
-    //  cliente.dados.forEach((dado: any) => {
-
-    //   this.vp.dadosClientes.push({
-    //     nome: cliente.nome,
-    //     gestor: cliente.gestor,
-    //     dados: [
-    //       {
-    //         linhaDeProduto: dado.linhaDeProduto,
-    //         modulo: dado.modulo,
-    //         familia: dado.familia,
-    //         nota: dado.nota,
-    //         mes: dado.mes,
-    //       },
-    //     ],
-    //   });
-    //  });
+     this.teste = [];
+     cliente.dados.forEach((dado: any) => {
+      // console.log(dado);
       
+      this.teste.push({
+        linhaDeProduto: dado.linhaDeProduto,
+        modulo: dado.modulo,
+        familia: dado.familia,
+        nota: dado.nota,
+        mes: dado.mes,
+      });
+      
+     });
+
+     this.vp.dadosClientes.push({
+      nome: cliente.nome,
+      gestor: cliente.gestor,
+      dados: this.teste,
+    });
+      // console.log("teste");
+      
+    //  console.log(this.teste);
+     
 
 
+      // console.log(cliente.dados);
       
     });
     console.log(this.vp.dadosClientes);
 
-    console.log(this.gestores);
-    console.log(this.clientes);
+    // console.log(this.gestores);
+    // console.log(this.clientes);
   }
   onUpload(event: UploadEvent) {
     this.loading = true;
