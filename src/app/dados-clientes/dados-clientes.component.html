@@ -6,10 +6,18 @@
   <div>
     <p-accordion [multiple]="true">
       <p-accordionTab
-        header="{{ cliente.nome }} --- Gestor Comercial: {{ cliente.gestor }}"
+        header="{{ cliente.nome }} "
         *ngFor="let cliente of clientes"
       >
         <div>
+          <div class="mb-4">
+            <span
+              ><b class="background border-round-sm w-12rem no-wrap p-1"
+                >Gestor Comercial:</b
+              >
+              {{ cliente.gestor }}
+            </span>
+          </div>
           <p-table [value]="cliente.dados">
             <ng-template pTemplate="header">
               <tr>

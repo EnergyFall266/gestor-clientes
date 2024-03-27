@@ -7,14 +7,21 @@
   >
     <ng-template pTemplate="header">
       <div class="w-9">
-        <p-image src="assets/images/logo-prisma.jpg" width="100%" class="cursor-pointer" (click)="refresh()"/>
+        <p-image
+          src="assets/images/logo-prisma.jpg"
+          width="100%"
+          class="cursor-pointer"
+          (click)="refresh()"
+        />
       </div>
     </ng-template>
 
     <ng-template pTemplate="content">
       <div class="flex flex-column">
         <div>
-          <p class="background mb-3 border-round-sm w-16rem flex justify-content-center py-1">
+          <p
+            class="background mb-3 border-round-sm w-16rem flex justify-content-center py-1"
+          >
             Gestor Comercial Responsável:
           </p>
 
@@ -27,12 +34,13 @@
           ></p-dropdown>
         </div>
         <div>
-          <p class="mb-3 flex justify-content-center w-5rem border-round-sm  py-1 background">
+          <p
+            class="mb-3 flex justify-content-center w-5rem border-round-sm py-1 background"
+          >
             Cliente:
           </p>
 
           <p-dropdown
-           
             [style]="{ width: '17rem' }"
             [options]="clientes"
             optionLabel="nome"
@@ -42,15 +50,21 @@
             filterBy="nome"
             placeholder="Selecione o Cliente"
             (onChange)="pesquisaCliente()"
-       
           ></p-dropdown>
         </div>
-        <div >
-          <p class="mb-3 flex justify-content-center w-5rem border-round-sm  py-1 background">
+        <div>
+          <p
+            class="mb-3 flex justify-content-center w-5rem border-round-sm py-1 background"
+          >
             Módulo:
           </p>
-          <div class="p-inputgroup " style="width: 17rem;">
-            <input type="text" pInputText [(ngModel)]="modulo"  (keydown.enter)="pesquisaModulo()"/>
+          <div class="p-inputgroup" style="width: 17rem">
+            <input
+              type="text"
+              pInputText
+              [(ngModel)]="modulo"
+              (keydown.enter)="pesquisaModulo()"
+            />
             <button
               type="button"
               pButton
@@ -71,11 +85,12 @@
               mode="basic"
               chooseLabel="Upload"
               chooseIcon="pi pi-upload"
-              name="CLIENTES X MODULOS SENIOR"
-              url="https://www.primefaces.org/cdn/api/upload.php"
+             [customUpload]="true"
+              accept=".xlsx"
+              url="http://localhost:3000/upload"
               [auto]="true"
-              accept="image/*"
-              (onUpload)="onUpload($event)"
+              (uploadHandler)="onUpload($event)"
+              
             ></p-fileUpload>
           </ng-template>
           <p-button

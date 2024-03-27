@@ -4,10 +4,7 @@ import { MessageService } from 'primeng/api';
 import { DadosClientesComponent } from '../dados-clientes/dados-clientes.component';
 import { DataService } from '../data.service';
 import { SharedDataService } from '../shared-data.service';
-interface UploadEvent {
-  originalEvent: Event;
-  files: File[];
-}
+
 interface clientes {
   nome: string;
 }
@@ -94,34 +91,51 @@ export class SidebarComponent {
     // console.log(this.gestores);
     // console.log(this.clientes);
   }
-  onUpload(event: UploadEvent) {
+  async onUpload(event: any) {
     this.loading = true;
-    setTimeout(() => {
-      this.loading = false;
+    this.vp.Buscando_WS = true;
+    console.log(event);
+
+    let send = await this.dataService.sendFile(event.files[0]);
+    console.log(send);
+    if (send.status === 200) {
       this.messageService.add({
         severity: 'success',
         summary: 'Sucesso',
         detail: 'Planilha enviada',
         life: 3000,
       });
-    }, 3000);
+      this.loading = false;
+      this.vp.Buscando_WS = false;
+      setTimeout(() => {
+        this.refresh();
+      }, 1800);
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erro',
+        detail: 'Problema ao enviar planilha',
+        life: 3000,
+      });
+      this.loading = false;
+      this.vp.Buscando_WS = false;
+    }
   }
 
   pesquisaGestor() {
     this.vp.Buscando_WS = true;
     console.log(this.gestorSelecionado);
-   
+
     let dados: any = this.vp.dadosClientes;
     let dadosFiltrados = dados.filter(
       (cliente: any) => cliente.gestor === this.gestorSelecionado
     );
     this.sharedDataService.setFilteredData(dadosFiltrados);
     console.log(dadosFiltrados);
-     this.clienteSelecionado = '';
+    this.clienteSelecionado = '';
     setTimeout(() => {
       this.vp.Buscando_WS = false;
     }, 100);
-    
   }
 
   pesquisaCliente() {
@@ -134,7 +148,7 @@ export class SidebarComponent {
 
     this.sharedDataService.setFilteredData(dadosFiltrados);
     console.log(dadosFiltrados);
-     this.gestorSelecionado = '';
+    this.gestorSelecionado = '';
     setTimeout(() => {
       this.vp.Buscando_WS = false;
     }, 100);
@@ -142,12 +156,27 @@ export class SidebarComponent {
 
   pesquisaModulo() {
     console.log(this.modulo);
+    if (this.modulo === '') {
+      return;
+    }
     this.vp.Buscando_WS = true;
+    let dados: any = this.vp.dadosClientes;
+    let dadosFiltrados = dados.filter((cliente: any) =>
+    cliente.dados.every((dado: any) =>
+    !dado.modulo.includes(this.modulo.toUpperCase())
+       
+    )
+  );
+
+  
+        
+      
+    console.log(dadosFiltrados);
+    this.sharedDataService.setFilteredData(dadosFiltrados);
+    
     setTimeout(() => {
       this.vp.Buscando_WS = false;
     }, 3000);
-    this.vp.dadosClientes = [];
-    // this.dadosCliente.atualizar();
   }
   refresh() {
     console.log('refresh');

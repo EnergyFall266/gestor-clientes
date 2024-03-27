@@ -28,5 +28,26 @@ try {
 }
 }
 
+async sendFile(file: any) {
+  const axios = require('axios');
+  const FormData = require('form-data');
+
+  let data = new FormData();
+  console.log(file);
+  
+  data.append('planilha', file);
+
+try {
+  const response = axios.post('http://localhost:3000/upload', data)
+  
+    console.log('Resposta da API:', response);
+    return response;
+  }
+  catch(error: any)  {
+    console.error('Erro ao enviar arquivo:', error);
+  };
 
 }
+}
+
+
