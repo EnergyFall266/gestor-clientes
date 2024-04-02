@@ -35,6 +35,7 @@ export class SidebarComponent {
   modulo: string = '';
   linhaProduto: any[] = [];
   teste: dados[] = [];
+  contem:string = "true";
 
   ngOnInit() {
     this.vp.Buscando_WS = true;
@@ -156,24 +157,32 @@ export class SidebarComponent {
 
   pesquisaModulo() {
     console.log(this.modulo);
+    console.log(this.contem);
+    
     if (this.modulo === '') {
       return;
     }
     this.vp.Buscando_WS = true;
     let dados: any = this.vp.dadosClientes;
-    let dadosFiltrados = dados.filter((cliente: any) =>
-    cliente.dados.every((dado: any) =>
-    !dado.modulo.includes(this.modulo.toUpperCase())
-       
-    )
-  );
-
-  
-        
-      
+    if(this.contem === "true"){
+      let dadosFiltrados = dados.filter((cliente: any) =>
+      cliente.dados.some(
+        (dado: any) => dado.modulo.includes(this.modulo.toUpperCase())
+      )
+    );
     console.log(dadosFiltrados);
     this.sharedDataService.setFilteredData(dadosFiltrados);
-    
+      }else{
+    let dadosFiltrados = dados.filter((cliente: any) =>
+      cliente.dados.every(
+        (dado: any) => !dado.modulo.includes(this.modulo.toUpperCase())
+      )
+      );
+      console.log(dadosFiltrados);
+      this.sharedDataService.setFilteredData(dadosFiltrados);
+      }
+
+
     setTimeout(() => {
       this.vp.Buscando_WS = false;
     }, 3000);
@@ -187,4 +196,6 @@ export class SidebarComponent {
 
     this.dadosCliente.reload();
   }
+
+
 }

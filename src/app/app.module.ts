@@ -35,6 +35,8 @@ import { ImageModule } from 'primeng/image';
 import { SidebarModule } from 'primeng/sidebar';
 import { ToastModule } from 'primeng/toast';
 import { AccordionModule } from 'primeng/accordion';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+
 
 
 export const HttpLoaderFactory = (httpClient: HttpClient) =>
@@ -75,6 +77,7 @@ export const HttpLoaderFactory = (httpClient: HttpClient) =>
     SidebarModule,
     ToastModule,
     AccordionModule,
+    ToggleButtonModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
