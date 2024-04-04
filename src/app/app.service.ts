@@ -5,6 +5,9 @@ import * as gedf from 'prisma_prismafunctions';
 import * as wsb from 'src/beans/WS_Beans';
 import { ResponseLoadData } from 'src/beans/VP_BPM';
 import { exportaG5 } from 'src/functions/WS_Axios';
+import { user } from '@seniorsistemas/senior-platform-data';
+
+import { Subject } from 'rxjs';
 
 const STEP = environment.tarefa();
 
@@ -13,7 +16,30 @@ const STEP = environment.tarefa();
 })
 
 export class AppService {
-  constructor() { }
+  private token: any;
+  usuario: any;
+  public vp: VP_BPM = new VP_BPM();
+  private capturaAcao = new Subject<string>();
+  acao$ = this.capturaAcao.asObservable();
+  constructor() {
+    user
+    .getToken()
+    .then((retorno) => {
+      console.log(retorno);
+      
+      this.token = retorno;
+
+      const user = this.token.fullName.split('+');
+      let name = user[0] + ' ' + user[1];
+
+      this.capturaAcao.next(name);
+      
+    })
+    .catch((error) => {
+      alert(
+        'Não foi possível obter token. Verifique se a tela está sendo acessada pela plataforma Senior X.'
+      );
+    }); }
 
   public async exportaWS(port: string, body: string = '') {
     let g5: wsb.G5Response;

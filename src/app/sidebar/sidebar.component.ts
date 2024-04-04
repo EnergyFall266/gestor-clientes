@@ -4,6 +4,7 @@ import { MessageService } from 'primeng/api';
 import { DadosClientesComponent } from '../dados-clientes/dados-clientes.component';
 import { DataService } from '../data.service';
 import { SharedDataService } from '../shared-data.service';
+import { AppService } from '../app.service';
 
 interface clientes {
   nome: string;
@@ -34,7 +35,7 @@ export class SidebarComponent {
   linhaProduto: any[] = [];
   dados: dados[] = [];
   contem:string = "true";
-  usuario: string = '';
+  adm: boolean = false;
 
 
   ngOnInit() {
@@ -48,14 +49,19 @@ export class SidebarComponent {
     private messageService: MessageService,
     private dadosCliente: DadosClientesComponent,
     private dataService: DataService,
-    private sharedDataService: SharedDataService
+    private sharedDataService: SharedDataService,
+    private appService: AppService
   ) {
-    this.dataService.acao$.subscribe((retorno:string) => {
+    this.appService.acao$.subscribe((retorno) => {
       if (retorno) {
         console.log(retorno);
         
         // this.vp.token = retorno;
-        // this.Gestor = this.vp.token.username.split('@')[0];
+        
+        if(retorno === "Leonardo Vanzin"){
+          this.adm = true;
+        }
+
         this.ngOnInit();
       } else {
         this.messageService.clear();

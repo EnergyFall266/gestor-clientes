@@ -23,7 +23,7 @@ declare var workflowCockpit: any;
 })
 export class AppComponent {
   @ViewChild(Messages) msg!: Messages;
-  public title = 'ProjetoPadrao';
+  public title = 'Gestor-Clientes';
 
   
 

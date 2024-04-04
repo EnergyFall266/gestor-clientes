@@ -89,7 +89,7 @@
     </ng-template>
     <ng-template pTemplate="footer">
       <div class="flex justify-content-center">
-        <div class="card flex justify-content-center" *ngIf="this.vp.user_fullName === 'Leonardo Vanzin'">
+        <div class="card flex justify-content-center" *ngIf="adm">
           <p-toast></p-toast>
           <ng-template #upload>
             <p-fileUpload

@@ -6,30 +6,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class DataService {
-  private token: any;
-  usuario: any;
-  public vp: VP_BPM = new VP_BPM();
-  private capturaAcao = new Subject<string>();
-  acao$ = this.capturaAcao.asObservable();
-  constructor() {
-    user
-    .getToken()
-    .then((retorno:any) => {
-      console.log(retorno);
-      
-      this.token = retorno;
-
-      const user = this.token.fullName.split('+');
-      this.vp.user_fullName = user[0] + ' ' + user[1];
-
-      
-      
-    })
-    .catch((error:any) => {
-      alert(
-        'Não foi possível obter token. Verifique se a tela está sendo acessada pela plataforma Senior X.'
-      );
-    }); }
+  
   
 
 async getData() {
