@@ -74,7 +74,6 @@
             ></button>
           </div>
           <div class="flex justify-content-around mt-3">
-            <!-- <p-toggleButton [(ngModel)]="contem" onLabel="Contém" offLabel="Não contém"></p-toggleButton> -->
             <div class="flex align-items-center">
               <p-radioButton name="pizza" value="true" focus [(ngModel)]="contem" inputId="contem"></p-radioButton>
               <label for="contem" class="ml-2">Contém</label>
@@ -90,7 +89,7 @@
     </ng-template>
     <ng-template pTemplate="footer">
       <div class="flex justify-content-center">
-        <div class="card flex justify-content-center">
+        <div class="card flex justify-content-center" *ngIf="this.vp.user_fullName === 'Leonardo Vanzin'">
           <p-toast></p-toast>
           <ng-template #upload>
             <p-fileUpload

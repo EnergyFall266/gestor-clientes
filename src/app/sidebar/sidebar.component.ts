@@ -12,8 +12,6 @@ interface dados {
   linhaDeProduto: string;
   modulo: string;
   familia: string;
-  nota: string;
-  mes: string;
 }
 
 @Component({
@@ -34,11 +32,15 @@ export class SidebarComponent {
   loading: boolean = false;
   modulo: string = '';
   linhaProduto: any[] = [];
-  teste: dados[] = [];
+  dados: dados[] = [];
   contem:string = "true";
+  usuario: string = '';
+
 
   ngOnInit() {
     this.vp.Buscando_WS = true;
+    console.log(this.vp.user_fullName);
+    
     this.getData();
   }
 
@@ -47,7 +49,25 @@ export class SidebarComponent {
     private dadosCliente: DadosClientesComponent,
     private dataService: DataService,
     private sharedDataService: SharedDataService
-  ) {}
+  ) {
+    this.dataService.acao$.subscribe((retorno:string) => {
+      if (retorno) {
+        console.log(retorno);
+        
+        // this.vp.token = retorno;
+        // this.Gestor = this.vp.token.username.split('@')[0];
+        this.ngOnInit();
+      } else {
+        this.messageService.clear();
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro',
+          detail: 'Não foi possivel obter o usuário Token',
+        });
+      }
+    });
+
+  }
 
   async getData() {
     let data = await this.dataService.getData();
@@ -62,23 +82,21 @@ export class SidebarComponent {
         this.clientes.push({ nome: cliente.nome });
       }
 
-      this.teste = [];
+      this.dados = [];
       cliente.dados.forEach((dado: any) => {
         // console.log(dado);
 
-        this.teste.push({
+        this.dados.push({
           linhaDeProduto: dado.linhaDeProduto,
           modulo: dado.modulo,
           familia: dado.familia,
-          nota: dado.nota,
-          mes: dado.mes,
         });
       });
 
       this.vp.dadosClientes.push({
         nome: cliente.nome,
         gestor: cliente.gestor,
-        dados: this.teste,
+        dados: this.dados,
       });
       // console.log("teste");
 

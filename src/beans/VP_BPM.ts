@@ -18,8 +18,6 @@ interface dados {
   linhaDeProduto: string;
   modulo: string;
   familia: string;
-  nota: string;
-  mes: string;
   }
 
 export class AnexoFile {

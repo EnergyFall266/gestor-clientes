@@ -32,12 +32,7 @@
                 <th pSortableColumn="familia">
                   Família<p-sortIcon field="familia"></p-sortIcon>
                 </th>
-                <th pSortableColumn="nota">
-                  Nota<p-sortIcon field="nota"></p-sortIcon>
-                </th>
-                <th pSortableColumn="mes">
-                  Mês<p-sortIcon field="mes"></p-sortIcon>
-                </th>
+               
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-columns>
@@ -45,8 +40,6 @@
                 <td>{{ columns.linhaDeProduto }}</td>
                 <td>{{ columns.modulo }}</td>
                 <td>{{ columns.familia }}</td>
-                <td>{{ columns.nota }}</td>
-                <td>{{ columns.mes }}</td>
               </tr>
             </ng-template>
           </p-table>
