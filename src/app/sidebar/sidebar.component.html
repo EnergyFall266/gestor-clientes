@@ -78,7 +78,7 @@
               <p-radioButton name="pizza" value="true" focus [(ngModel)]="contem" inputId="contem"></p-radioButton>
               <label for="contem" class="ml-2">Contém</label>
           </div>
-          
+
           <div class="flex align-items-center">
               <p-radioButton  value="false" [(ngModel)]="contem" inputId="naoContem"></p-radioButton>
               <label for="naoContem" class="ml-2">Não Contém</label>
@@ -88,26 +88,33 @@
       </div>
     </ng-template>
     <ng-template pTemplate="footer">
-      <div class="flex justify-content-center">
+      <div class="flex justify-content-evenly">
         <div class="card flex justify-content-center" *ngIf="adm">
           <p-toast></p-toast>
           <ng-template #upload>
             <p-fileUpload
-              mode="basic"
-              chooseLabel="Upload"
-              chooseIcon="pi pi-upload"
-             [customUpload]="true"
-              accept=".xlsx"
-              url="http://localhost:3000/upload"
-              [auto]="true"
-              (uploadHandler)="onUpload($event)"
-              
+            mode="basic"
+            chooseLabel="Upload"
+            chooseIcon="pi pi-upload"
+            [customUpload]="true"
+            accept=".xlsx"
+            url="http://localhost:3000/upload"
+            [auto]="true"
+            (uploadHandler)="onUpload($event)"
+
             ></p-fileUpload>
           </ng-template>
           <p-button
-            label="Subindo"
-            [loading]="loading"
-            *ngIf="loading; else upload"
+          label="Subindo"
+          [loading]="loading"
+          *ngIf="loading; else upload"
+          ></p-button>
+        </div>
+        <div>
+          <p-button
+            label="Export"
+            icon="pi pi-download"
+            (click)="exportar()"
           ></p-button>
         </div>
       </div>

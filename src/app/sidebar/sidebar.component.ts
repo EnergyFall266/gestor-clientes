@@ -5,6 +5,7 @@ import { DadosClientesComponent } from '../dados-clientes/dados-clientes.compone
 import { DataService } from '../data.service';
 import { SharedDataService } from '../shared-data.service';
 import { AppService } from '../app.service';
+import * as XLSX from 'xlsx'
 
 interface clientes {
   nome: string;
@@ -13,6 +14,15 @@ interface dados {
   linhaDeProduto: string;
   modulo: string;
   familia: string;
+}
+
+interface exporta{
+  nome: string;
+  gestor: string;
+  linhaDeProduto: string;
+  modulo: string;
+  familia: string;
+
 }
 
 @Component({
@@ -36,12 +46,13 @@ export class SidebarComponent {
   dados: dados[] = [];
   contem:string = "true";
   adm: boolean = false;
+  exporta: exporta[] = [];
 
 
   ngOnInit() {
     this.vp.Buscando_WS = true;
-    console.log(this.vp.user_fullName);
-    
+
+
     this.getData();
   }
 
@@ -55,14 +66,13 @@ export class SidebarComponent {
     this.appService.acao$.subscribe((retorno) => {
       if (retorno) {
         console.log(retorno);
-        
-        // this.vp.token = retorno;
-        
+
+
         if(retorno === "Leonardo Vanzin"){
           this.adm = true;
         }
 
-        this.ngOnInit();
+
       } else {
         this.messageService.clear();
         this.messageService.add({
@@ -182,7 +192,7 @@ export class SidebarComponent {
   pesquisaModulo() {
     console.log(this.modulo);
     console.log(this.contem);
-    
+
     if (this.modulo === '') {
       return;
     }
@@ -219,6 +229,32 @@ export class SidebarComponent {
     });
 
     this.dadosCliente.reload();
+  }
+
+  exportar() {
+    console.log('exportar');
+    let data = this.sharedDataService.getFilteredData();
+    data.forEach((cliente: any) => {
+      console.log(cliente);
+      cliente.dados.forEach((dado: any) => {
+        console.log(dado);
+        this.exporta.push({
+          nome: cliente.nome,
+          gestor: cliente.gestor,
+          linhaDeProduto: dado.linhaDeProduto,
+          modulo: dado.modulo,
+          familia: dado.familia,
+        });
+      });
+    });
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.exporta);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Dados');
+    XLSX.writeFile(wb, 'dados.xlsx');
+
+
+
+
   }
 
 
