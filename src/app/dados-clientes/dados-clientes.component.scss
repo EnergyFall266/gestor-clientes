@@ -1,34 +1,35 @@
 :host ::ng-deep {
-    &.p-accordion .p-accordion-header .p-accordion-header-link {
-        background-color: #0169B4;
-        opacity: 0.85;
-        color: white;
-    }
-    &.p-accordion .p-accordion-header:not(.p-highlight):not(.p-disabled):hover .p-accordion-header-link{
-        background-color: #0169B4;
-        opacity: 0.85;
-        color: white;
-    
-   }
-    &.p-accordion .p-accordion-header:not(.p-disabled).p-highlight .p-accordion-header-link{
-        background: #0169B4;
-        opacity: 0.85;
-        color: white;
-    }
-    &.p-datatable .p-datatable-thead > tr > th{
-        background-color: #0169B4;
-        opacity: 0.85;
-        color: white;
-    }
-    &.p-datatable .p-sortable-column .p-sortable-column-icon{
-        color: white;
-    }
-    .background{
-        background-color: #0169B4;
-        opacity: 0.85;
-        font-family: 'Inter';
-        color: white;
-      }
-   
-   
+  &.p-accordion .p-accordion-header .p-accordion-header-link {
+    background-color: #0169b4;
+    opacity: 0.85;
+    color: white;
+  }
+  &.p-accordion
+    .p-accordion-header:not(.p-highlight):not(.p-disabled):hover
+    .p-accordion-header-link {
+    background-color: #0169b4;
+    opacity: 0.85;
+    color: white;
+  }
+  &.p-accordion
+    .p-accordion-header:not(.p-disabled).p-highlight
+    .p-accordion-header-link {
+    background: #0169b4;
+    opacity: 0.85;
+    color: white;
+  }
+  &.p-datatable .p-datatable-thead > tr > th {
+    background-color: #0169b4;
+    opacity: 0.85;
+    color: white;
+  }
+  &.p-datatable .p-sortable-column .p-sortable-column-icon {
+    color: white;
+  }
+  .background {
+    background-color: #0169b4;
+    opacity: 0.85;
+    font-family: "Inter";
+    color: white;
+  }
 }

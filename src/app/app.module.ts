@@ -37,17 +37,11 @@ import { ToastModule } from 'primeng/toast';
 import { AccordionModule } from 'primeng/accordion';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 
-
-
 export const HttpLoaderFactory = (httpClient: HttpClient) =>
   new TranslateHttpLoader(httpClient, 'assets/i18n/');
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DadosClientesComponent,
-    SidebarComponent,
-  ],
+  declarations: [AppComponent, DadosClientesComponent, SidebarComponent],
   imports: [
     BrowserAnimationsModule,
     HttpClientModule,
@@ -89,4 +83,4 @@ export const HttpLoaderFactory = (httpClient: HttpClient) =>
   providers: [PastaService, Validate_Service, AnexoService],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

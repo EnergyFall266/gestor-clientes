@@ -75,14 +75,23 @@
           </div>
           <div class="flex justify-content-around mt-3">
             <div class="flex align-items-center">
-              <p-radioButton name="pizza" value="true" focus [(ngModel)]="contem" inputId="contem"></p-radioButton>
+              <p-radioButton
+                value="true"
+                focus
+                [(ngModel)]="contem"
+                inputId="contem"
+              ></p-radioButton>
               <label for="contem" class="ml-2">Contém</label>
-          </div>
+            </div>
 
-          <div class="flex align-items-center">
-              <p-radioButton  value="false" [(ngModel)]="contem" inputId="naoContem"></p-radioButton>
+            <div class="flex align-items-center">
+              <p-radioButton
+                value="false"
+                [(ngModel)]="contem"
+                inputId="naoContem"
+              ></p-radioButton>
               <label for="naoContem" class="ml-2">Não Contém</label>
-          </div>
+            </div>
           </div>
         </div>
       </div>
@@ -93,21 +102,20 @@
           <p-toast></p-toast>
           <ng-template #upload>
             <p-fileUpload
-            mode="basic"
-            chooseLabel="Upload"
-            chooseIcon="pi pi-upload"
-            [customUpload]="true"
-            accept=".xlsx"
-            url="https://demonstra.prismainformatica.com.br:3001/upload"
-            [auto]="true"
-            (uploadHandler)="onUpload($event)"
-
+              mode="basic"
+              chooseLabel="Upload"
+              chooseIcon="pi pi-upload"
+              [customUpload]="true"
+              accept=".xlsx"
+              url="https://demonstra.prismainformatica.com.br:3001/upload"
+              [auto]="true"
+              (uploadHandler)="onUpload($event)"
             ></p-fileUpload>
           </ng-template>
           <p-button
-          label="Subindo"
-          [loading]="loading"
-          *ngIf="loading; else upload"
+            label="Subindo"
+            [loading]="loading"
+            *ngIf="loading; else upload"
           ></p-button>
         </div>
         <div>

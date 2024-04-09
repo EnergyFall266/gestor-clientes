@@ -5,7 +5,7 @@ import { DadosClientesComponent } from '../dados-clientes/dados-clientes.compone
 import { DataService } from '../data.service';
 import { SharedDataService } from '../shared-data.service';
 import { AppService } from '../app.service';
-import * as XLSX from 'xlsx'
+import * as XLSX from 'xlsx';
 
 interface clientes {
   nome: string;
@@ -16,13 +16,12 @@ interface dados {
   familia: string;
 }
 
-interface exporta{
+interface exporta {
   nome: string;
   gestor: string;
   linhaDeProduto: string;
   modulo: string;
   familia: string;
-
 }
 
 @Component({
@@ -44,15 +43,13 @@ export class SidebarComponent {
   modulo: string = '';
   linhaProduto: any[] = [];
   dados: dados[] = [];
-  contem:string = "true";
+  contem: string = 'true';
   adm: boolean = false;
   exporta: exporta[] = [];
   preArmazenado: any[] = [];
 
-
   ngOnInit() {
     this.vp.Buscando_WS = true;
-
 
     this.getData();
   }
@@ -66,14 +63,9 @@ export class SidebarComponent {
   ) {
     this.appService.acao$.subscribe((retorno) => {
       if (retorno) {
-        console.log(retorno);
-
-
-        if(retorno === "Leonardo Vanzin"){
+        if (retorno === 'Leonardo Vanzin') {
           this.adm = true;
         }
-
-
       } else {
         this.messageService.clear();
         this.messageService.add({
@@ -83,12 +75,10 @@ export class SidebarComponent {
         });
       }
     });
-
   }
 
   async getData() {
     let data = await this.dataService.getData();
-    console.log(data);
 
     data.Clientes.forEach((cliente: any) => {
       if (!this.gestores.includes(cliente.gestor)) {
@@ -101,8 +91,6 @@ export class SidebarComponent {
 
       this.dados = [];
       cliente.dados.forEach((dado: any) => {
-    
-
         this.dados.push({
           linhaDeProduto: dado.linhaDeProduto,
           modulo: dado.modulo,
@@ -115,20 +103,15 @@ export class SidebarComponent {
         gestor: cliente.gestor,
         dados: this.dados,
       });
-
     });
-    console.log(this.vp.dadosClientes);
     this.sharedDataService.setFilteredData(this.vp.dadosClientes);
     this.vp.Buscando_WS = false;
-
   }
   async onUpload(event: any) {
     this.loading = true;
     this.vp.Buscando_WS = true;
-    console.log(event);
 
     let send = await this.dataService.sendFile(event.files[0]);
-    console.log(send);
     if (send.status === 200) {
       this.messageService.add({
         severity: 'success',
@@ -155,40 +138,33 @@ export class SidebarComponent {
 
   pesquisaGestor() {
     this.vp.Buscando_WS = true;
-    console.log(this.gestorSelecionado);
 
     let dados: any = this.sharedDataService.getFilteredData();
     let dadosFiltrados = dados.filter(
       (cliente: any) => cliente.gestor === this.gestorSelecionado
     );
     this.sharedDataService.setFilteredData(dadosFiltrados);
-    console.log(dadosFiltrados);
- 
-    this.preArmazenado = dadosFiltrados
+
+    this.preArmazenado = dadosFiltrados;
     this.vazio();
   }
 
   pesquisaCliente() {
     this.vp.Buscando_WS = true;
-    
+
     let dados: any = this.sharedDataService.getFilteredData();
     let dadosFiltrados = dados.filter(
       (cliente: any) => cliente.nome === this.clienteSelecionado
     );
-    console.log(dadosFiltrados);
 
     this.sharedDataService.setFilteredData(dadosFiltrados);
-    console.log(dadosFiltrados);
-    this.gestorSelecionado = '';
 
-    this.preArmazenado = dadosFiltrados
+    this.preArmazenado = dadosFiltrados;
     this.vazio();
   }
 
   pesquisaModulo() {
-    console.log(this.modulo);
-    console.log(this.contem);
-    if(this.preArmazenado.length === 0){
+    if (this.preArmazenado.length === 0) {
       this.preArmazenado = this.sharedDataService.getFilteredData();
     }
 
@@ -199,35 +175,25 @@ export class SidebarComponent {
     // let dados: any = this.vp.dadosClientes;
     // let dados: any = this.sharedDataService.getFilteredData();
     let dados: any = this.preArmazenado;
-    if(this.contem === "true"){
+    if (this.contem === 'true') {
       let dadosFiltrados = dados.filter((cliente: any) =>
-      cliente.dados.some(
-        (dado: any) => dado.modulo.includes(this.modulo.toUpperCase())
-      )
-    );
-    console.log(dadosFiltrados);
-    this.sharedDataService.setFilteredData(dadosFiltrados);
-      }else{
-    let dadosFiltrados = dados.filter((cliente: any) =>
-      cliente.dados.every(
-        (dado: any) => !dado.modulo.includes(this.modulo.toUpperCase())
-      )
+        cliente.dados.some((dado: any) =>
+          dado.modulo.includes(this.modulo.toUpperCase())
+        )
       );
-      console.log(dadosFiltrados);
       this.sharedDataService.setFilteredData(dadosFiltrados);
-      }
-
-
+    } else {
+      let dadosFiltrados = dados.filter((cliente: any) =>
+        cliente.dados.every(
+          (dado: any) => !dado.modulo.includes(this.modulo.toUpperCase())
+        )
+      );
+      this.sharedDataService.setFilteredData(dadosFiltrados);
+    }
 
     this.vazio();
   }
   refresh() {
-    console.log('refresh');
-    let dados: any = this.vp.dadosClientes;
-    dados.forEach((cliente: any) => {
-      console.log(cliente);
-    });
-
     this.dadosCliente.reload();
   }
 
@@ -251,10 +217,6 @@ export class SidebarComponent {
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Dados');
     XLSX.writeFile(wb, 'dados.xlsx');
-
-
-
-
   }
 
   vazio() {
@@ -266,21 +228,16 @@ export class SidebarComponent {
         life: 3000,
       });
       setTimeout(() => {
-        
         this.sharedDataService.setFilteredData(this.vp.dadosClientes);
         this.gestorSelecionado = '';
         this.clienteSelecionado = '';
         this.modulo = '';
         this.vp.Buscando_WS = false;
       }, 1000);
-    }
-    else{
+    } else {
       setTimeout(() => {
-        
         this.vp.Buscando_WS = false;
       }, 1000);
     }
-   
   }
-
 }

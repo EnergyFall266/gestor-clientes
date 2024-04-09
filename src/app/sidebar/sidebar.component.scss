@@ -1,33 +1,30 @@
 :host ::ng-deep {
-    &.p-sidebar {
-      position: fixed;
-      width: 340px;
-      box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-        rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-    }
-    &.p-sidebar .p-sidebar-header {
-        justify-content: center;
-        align-items: center;
-        
-      }
-      &.p-button  {
-        background-color: #0169B4;
-        color: white;
-        font-size: 16px;
-        padding: 10px 24px;
-  
-      }
-      &.p-button:hover {
-        background-color: #0056b3;
-      }
-     &.p-dropdown-panel .p-dropdown-items{
-      width: 16rem;
-     }
+  &.p-sidebar {
+    position: fixed;
+    width: 340px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+      rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   }
-.background{
-  background-color: #0169B4;
+  &.p-sidebar .p-sidebar-header {
+    justify-content: center;
+    align-items: center;
+  }
+  &.p-button {
+    background-color: #0169b4;
+    color: white;
+    font-size: 16px;
+    padding: 10px 24px;
+  }
+  &.p-button:hover {
+    background-color: #0056b3;
+  }
+  &.p-dropdown-panel .p-dropdown-items {
+    width: 16rem;
+  }
+}
+.background {
+  background-color: #0169b4;
   opacity: 0.85;
-  font-family: 'Inter';
+  font-family: "Inter";
   color: white;
 }
-  

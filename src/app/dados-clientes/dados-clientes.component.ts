@@ -28,7 +28,6 @@ export class DadosClientesComponent {
     this.clientes = this.sharedDataService.getFilteredData();
   }
 
-
   reload() {
     window.location.reload();
   }

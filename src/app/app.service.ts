@@ -12,9 +12,8 @@ import { Subject } from 'rxjs';
 const STEP = environment.tarefa();
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class AppService {
   private token: any;
   usuario: any;
@@ -23,23 +22,22 @@ export class AppService {
   acao$ = this.capturaAcao.asObservable();
   constructor() {
     user
-    .getToken()
-    .then((retorno) => {
-      console.log(retorno);
-      
-      this.token = retorno;
+      .getToken()
+      .then((retorno) => {
 
-      const user = this.token.fullName.split('+');
-      let name = user[0] + ' ' + user[1];
+        this.token = retorno;
 
-      this.capturaAcao.next(name);
-      
-    })
-    .catch((error) => {
-      alert(
-        'Não foi possível obter token. Verifique se a tela está sendo acessada pela plataforma Senior X.'
-      );
-    }); }
+        const user = this.token.fullName.split('+');
+        let name = user[0] + ' ' + user[1];
+
+        this.capturaAcao.next(name);
+      })
+      .catch((error) => {
+        alert(
+          'Não foi possível obter token. Verifique se a tela está sendo acessada pela plataforma Senior X.'
+        );
+      });
+  }
 
   public async exportaWS(port: string, body: string = '') {
     let g5: wsb.G5Response;
@@ -50,15 +48,17 @@ export class AppService {
       totReg: number;
       msgRet: string;
       servicos: any[];
-    } = { totReg: g5.qtdReg ?? 0, msgRet: g5.msgRet ?? '', servicos: g5.servicos ?? [] };
+    } = {
+      totReg: g5.qtdReg ?? 0,
+      msgRet: g5.msgRet ?? '',
+      servicos: g5.servicos ?? [],
+    };
 
-    return r
+    return r;
   }
 }
 
-
 export class PastaService {
-
   async pegarPastas(vp: VP_BPM, pan?: string) {
     const paiId: string = await gedf.checkFolder(
       vp.token,
@@ -109,10 +109,6 @@ export class PastaService {
 
     return { paiId, proId, panId: '' };
   }
-
-
-
-
 }
 
 export class AnexoService {
