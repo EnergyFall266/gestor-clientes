@@ -34,14 +34,12 @@ async sendFile(file: any) {
   const FormData = require('form-data');
 
   let data = new FormData();
-  console.log(file);
   
   data.append('planilha', file);
 
 try {
   const response = axios.post('https://demonstra.prismainformatica.com.br:3001/upload', data)
   
-    console.log('Resposta da API:', response);
     return response;
   }
   catch(error: any)  {

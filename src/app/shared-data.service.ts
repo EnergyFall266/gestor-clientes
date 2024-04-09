@@ -12,7 +12,6 @@ setFilteredData(data: any): void{
   
 }
 getFilteredData(): any[]{
-  console.log(this.getorCliente);
   return this.getorCliente;
 }
 }

@@ -26,7 +26,6 @@ export class DadosClientesComponent {
 
   ngOnInit() {
     this.clientes = this.sharedDataService.getFilteredData();
-    console.log(this.clientes);
   }
 
 

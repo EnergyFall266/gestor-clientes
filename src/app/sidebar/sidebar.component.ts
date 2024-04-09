@@ -47,6 +47,7 @@ export class SidebarComponent {
   contem:string = "true";
   adm: boolean = false;
   exporta: exporta[] = [];
+  preArmazenado: any[] = [];
 
 
   ngOnInit() {
@@ -100,7 +101,7 @@ export class SidebarComponent {
 
       this.dados = [];
       cliente.dados.forEach((dado: any) => {
-        // console.log(dado);
+    
 
         this.dados.push({
           linhaDeProduto: dado.linhaDeProduto,
@@ -114,17 +115,12 @@ export class SidebarComponent {
         gestor: cliente.gestor,
         dados: this.dados,
       });
-      // console.log("teste");
 
-      //  console.log(this.teste);
-
-      // console.log(cliente.dados);
     });
     console.log(this.vp.dadosClientes);
     this.sharedDataService.setFilteredData(this.vp.dadosClientes);
     this.vp.Buscando_WS = false;
-    // console.log(this.gestores);
-    // console.log(this.clientes);
+
   }
   async onUpload(event: any) {
     this.loading = true;
@@ -161,21 +157,21 @@ export class SidebarComponent {
     this.vp.Buscando_WS = true;
     console.log(this.gestorSelecionado);
 
-    let dados: any = this.vp.dadosClientes;
+    let dados: any = this.sharedDataService.getFilteredData();
     let dadosFiltrados = dados.filter(
       (cliente: any) => cliente.gestor === this.gestorSelecionado
     );
     this.sharedDataService.setFilteredData(dadosFiltrados);
     console.log(dadosFiltrados);
-    this.clienteSelecionado = '';
-    setTimeout(() => {
-      this.vp.Buscando_WS = false;
-    }, 100);
+ 
+    this.preArmazenado = dadosFiltrados
+    this.vazio();
   }
 
   pesquisaCliente() {
     this.vp.Buscando_WS = true;
-    let dados: any = this.vp.dadosClientes;
+    
+    let dados: any = this.sharedDataService.getFilteredData();
     let dadosFiltrados = dados.filter(
       (cliente: any) => cliente.nome === this.clienteSelecionado
     );
@@ -184,20 +180,25 @@ export class SidebarComponent {
     this.sharedDataService.setFilteredData(dadosFiltrados);
     console.log(dadosFiltrados);
     this.gestorSelecionado = '';
-    setTimeout(() => {
-      this.vp.Buscando_WS = false;
-    }, 100);
+
+    this.preArmazenado = dadosFiltrados
+    this.vazio();
   }
 
   pesquisaModulo() {
     console.log(this.modulo);
     console.log(this.contem);
+    if(this.preArmazenado.length === 0){
+      this.preArmazenado = this.sharedDataService.getFilteredData();
+    }
 
     if (this.modulo === '') {
       return;
     }
     this.vp.Buscando_WS = true;
-    let dados: any = this.vp.dadosClientes;
+    // let dados: any = this.vp.dadosClientes;
+    // let dados: any = this.sharedDataService.getFilteredData();
+    let dados: any = this.preArmazenado;
     if(this.contem === "true"){
       let dadosFiltrados = dados.filter((cliente: any) =>
       cliente.dados.some(
@@ -217,9 +218,8 @@ export class SidebarComponent {
       }
 
 
-    setTimeout(() => {
-      this.vp.Buscando_WS = false;
-    }, 3000);
+
+    this.vazio();
   }
   refresh() {
     console.log('refresh');
@@ -257,5 +257,30 @@ export class SidebarComponent {
 
   }
 
+  vazio() {
+    if (this.sharedDataService.getFilteredData().length === 0) {
+      this.messageService.add({
+        severity: 'info',
+        summary: 'Informação',
+        detail: 'Nenhum dado encontrado',
+        life: 3000,
+      });
+      setTimeout(() => {
+        
+        this.sharedDataService.setFilteredData(this.vp.dadosClientes);
+        this.gestorSelecionado = '';
+        this.clienteSelecionado = '';
+        this.modulo = '';
+        this.vp.Buscando_WS = false;
+      }, 1000);
+    }
+    else{
+      setTimeout(() => {
+        
+        this.vp.Buscando_WS = false;
+      }, 1000);
+    }
+   
+  }
 
 }
