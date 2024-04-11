@@ -17,6 +17,7 @@
     </ng-template>
 
     <ng-template pTemplate="content">
+      <p-toast></p-toast>
       <div class="flex flex-column">
         <div>
           <p
@@ -99,7 +100,7 @@
     <ng-template pTemplate="footer">
       <div class="flex justify-content-evenly">
         <div class="card flex justify-content-center" *ngIf="adm">
-          <p-toast></p-toast>
+          <!-- <p-toast></p-toast> -->
           <ng-template #upload>
             <p-fileUpload
               mode="basic"

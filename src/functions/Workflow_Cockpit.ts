@@ -37,7 +37,6 @@ function saveData(vp: VP_BPM): any {
 }
 
 function rollback(data: any, info: any): any {
-  console.log(data.error);
   if (info.isRequestNew()) return removeData(data.processInstanceId);
   return rollbackData(data.processInstanceId);
 }

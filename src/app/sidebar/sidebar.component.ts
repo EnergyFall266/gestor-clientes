@@ -47,6 +47,7 @@ export class SidebarComponent {
   adm: boolean = false;
   exporta: exporta[] = [];
   preArmazenado: any[] = [];
+  selecaoAnterior: string = '';
 
   ngOnInit() {
     this.vp.Buscando_WS = true;
@@ -63,7 +64,7 @@ export class SidebarComponent {
   ) {
     this.appService.acao$.subscribe((retorno) => {
       if (retorno) {
-        if (retorno === 'Leonardo Vanzin') {
+        if (retorno === 'Everson Godoy Freire') {
           this.adm = true;
         }
       } else {
@@ -138,6 +139,9 @@ export class SidebarComponent {
 
   pesquisaGestor() {
     this.vp.Buscando_WS = true;
+    if(this.selecaoAnterior === 'gestor') {
+      this.sharedDataService.setFilteredData(this.vp.dadosClientes);
+    }
 
     let dados: any = this.sharedDataService.getFilteredData();
     let dadosFiltrados = dados.filter(
@@ -146,12 +150,16 @@ export class SidebarComponent {
     this.sharedDataService.setFilteredData(dadosFiltrados);
 
     this.preArmazenado = dadosFiltrados;
+    this.selecaoAnterior = 'gestor';
     this.vazio();
   }
 
   pesquisaCliente() {
     this.vp.Buscando_WS = true;
 
+    if(this.selecaoAnterior === 'cliente') {
+      this.sharedDataService.setFilteredData(this.vp.dadosClientes);
+    }
     let dados: any = this.sharedDataService.getFilteredData();
     let dadosFiltrados = dados.filter(
       (cliente: any) => cliente.nome === this.clienteSelecionado
@@ -160,6 +168,7 @@ export class SidebarComponent {
     this.sharedDataService.setFilteredData(dadosFiltrados);
 
     this.preArmazenado = dadosFiltrados;
+    this.selecaoAnterior = 'cliente';
     this.vazio();
   }
 
@@ -190,6 +199,7 @@ export class SidebarComponent {
       );
       this.sharedDataService.setFilteredData(dadosFiltrados);
     }
+    this.selecaoAnterior = 'modulo';
 
     this.vazio();
   }
@@ -198,12 +208,10 @@ export class SidebarComponent {
   }
 
   exportar() {
-    console.log('exportar');
     let data = this.sharedDataService.getFilteredData();
+    this.exporta = [];
     data.forEach((cliente: any) => {
-      console.log(cliente);
       cliente.dados.forEach((dado: any) => {
-        console.log(dado);
         this.exporta.push({
           nome: cliente.nome,
           gestor: cliente.gestor,
@@ -222,8 +230,8 @@ export class SidebarComponent {
   vazio() {
     if (this.sharedDataService.getFilteredData().length === 0) {
       this.messageService.add({
-        severity: 'info',
-        summary: 'Informação',
+        severity: 'warn',
+        summary: 'Aviso',
         detail: 'Nenhum dado encontrado',
         life: 3000,
       });
