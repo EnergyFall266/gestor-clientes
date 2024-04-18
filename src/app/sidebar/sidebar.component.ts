@@ -181,6 +181,12 @@ export class SidebarComponent {
       return;
     }
     this.vp.Buscando_WS = true;
+    
+    let multiModulos =this.modulo.includes(';')? this.modulo.split(';') : this.modulo;
+    console.log(multiModulos);
+    console.log(multiModulos.length);
+    
+   
     // let dados: any = this.vp.dadosClientes;
     // let dados: any = this.sharedDataService.getFilteredData();
     let dados: any = this.preArmazenado;
