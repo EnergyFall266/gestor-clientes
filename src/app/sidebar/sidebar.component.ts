@@ -185,7 +185,7 @@ export class SidebarComponent {
 
 
     if (this.modulo.includes(';')) {
-      let multiModulos: any[] = this.modulo.split(';');
+      let multiModulos: any[] = this.modulo.split(';').map(part => part.trim());
       let dados: any = this.preArmazenado;
       if (this.contem === 'true') {
         multiModulos.forEach((mod: any) => {
