@@ -139,7 +139,7 @@ export class SidebarComponent {
 
   pesquisaGestor() {
     this.vp.Buscando_WS = true;
-    if(this.selecaoAnterior === 'gestor') {
+    if (this.selecaoAnterior === 'gestor') {
       this.sharedDataService.setFilteredData(this.vp.dadosClientes);
     }
 
@@ -157,7 +157,7 @@ export class SidebarComponent {
   pesquisaCliente() {
     this.vp.Buscando_WS = true;
 
-    if(this.selecaoAnterior === 'cliente') {
+    if (this.selecaoAnterior === 'cliente') {
       this.sharedDataService.setFilteredData(this.vp.dadosClientes);
     }
     let dados: any = this.sharedDataService.getFilteredData();
@@ -181,29 +181,61 @@ export class SidebarComponent {
       return;
     }
     this.vp.Buscando_WS = true;
-    
-    let multiModulos =this.modulo.includes(';')? this.modulo.split(';') : this.modulo;
-    console.log(multiModulos);
-    console.log(multiModulos.length);
-    
-   
-    // let dados: any = this.vp.dadosClientes;
-    // let dados: any = this.sharedDataService.getFilteredData();
-    let dados: any = this.preArmazenado;
-    if (this.contem === 'true') {
-      let dadosFiltrados = dados.filter((cliente: any) =>
-        cliente.dados.some((dado: any) =>
-          dado.modulo.includes(this.modulo.toUpperCase())
-        )
-      );
-      this.sharedDataService.setFilteredData(dadosFiltrados);
+
+
+
+    if (this.modulo.includes(';')) {
+      let multiModulos: any[] = this.modulo.split(';');
+      let dados: any = this.preArmazenado;
+      if (this.contem === 'true') {
+        multiModulos.forEach((mod: any) => {
+          let dadosFiltrados = dados.filter((cliente: any) =>
+            cliente.dados.some((dado: any) => dado.modulo.includes(mod.toUpperCase()))
+          );
+          dados = dadosFiltrados;
+          console.log(dados);
+          console.log(mod.toUpperCase());
+
+
+        }
+        );
+        this.sharedDataService.setFilteredData(dados);
+
+      } else {
+        multiModulos.forEach((mod: any) => {
+          let dadosFiltrados = dados.filter((cliente: any) =>
+            cliente.dados.every(
+              (dado: any) => !dado.modulo.includes(mod.toUpperCase())
+            )
+          );
+          dados = dadosFiltrados;
+          console.log(dados);
+          console.log(mod.toUpperCase());
+
+
+        }
+        );
+        this.sharedDataService.setFilteredData(dados);
+      }
     } else {
-      let dadosFiltrados = dados.filter((cliente: any) =>
-        cliente.dados.every(
-          (dado: any) => !dado.modulo.includes(this.modulo.toUpperCase())
-        )
-      );
-      this.sharedDataService.setFilteredData(dadosFiltrados);
+      // let dados: any = this.vp.dadosClientes;
+      // let dados: any = this.sharedDataService.getFilteredData();
+      let dados: any = this.preArmazenado;
+      if (this.contem === 'true') {
+        let dadosFiltrados = dados.filter((cliente: any) =>
+          cliente.dados.some((dado: any) =>
+            dado.modulo.includes(this.modulo.toUpperCase())
+          )
+        );
+        this.sharedDataService.setFilteredData(dadosFiltrados);
+      } else {
+        let dadosFiltrados = dados.filter((cliente: any) =>
+          cliente.dados.every(
+            (dado: any) => !dado.modulo.includes(this.modulo.toUpperCase())
+          )
+        );
+        this.sharedDataService.setFilteredData(dadosFiltrados);
+      }
     }
     this.selecaoAnterior = 'modulo';
 
