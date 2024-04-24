@@ -24,7 +24,6 @@ export class AppService {
     user
       .getToken()
       .then((retorno) => {
-
         this.token = retorno;
 
         const user = this.token.fullName.split('+');

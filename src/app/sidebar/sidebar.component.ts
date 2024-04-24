@@ -64,7 +64,7 @@ export class SidebarComponent {
   ) {
     this.appService.acao$.subscribe((retorno) => {
       if (retorno) {
-        if (retorno === 'Everson Godoy Freire') {
+        if (retorno === 'Everson Godoy Freire' || retorno === 'Ivan Carlos Vanin') {
           this.adm = true;
         }
       } else {
@@ -139,11 +139,15 @@ export class SidebarComponent {
 
   pesquisaGestor() {
     this.vp.Buscando_WS = true;
+
     if (this.selecaoAnterior === 'gestor') {
       this.sharedDataService.setFilteredData(this.vp.dadosClientes);
+      this.modulo = '';
+      this.clienteSelecionado = '';
     }
 
     let dados: any = this.sharedDataService.getFilteredData();
+
     let dadosFiltrados = dados.filter(
       (cliente: any) => cliente.gestor === this.gestorSelecionado
     );
@@ -159,6 +163,8 @@ export class SidebarComponent {
 
     if (this.selecaoAnterior === 'cliente') {
       this.sharedDataService.setFilteredData(this.vp.dadosClientes);
+      this.modulo = '';
+      this.gestorSelecionado = '';
     }
     let dados: any = this.sharedDataService.getFilteredData();
     let dadosFiltrados = dados.filter(
@@ -181,57 +187,47 @@ export class SidebarComponent {
       return;
     }
     this.vp.Buscando_WS = true;
-
-
+    
 
     if (this.modulo.includes(';')) {
-      let multiModulos: any[] = this.modulo.split(';').map(part => part.trim());
+      let multiModulos: any[] = this.modulo
+        .split(';')
+        .map((part) => part.trim());
       let dados: any = this.preArmazenado;
       if (this.contem === 'true') {
         multiModulos.forEach((mod: any) => {
           let dadosFiltrados = dados.filter((cliente: any) =>
-            cliente.dados.some((dado: any) => dado.modulo.includes(mod.toUpperCase()))
+            cliente.dados.some((dado: any) =>
+              dado.modulo.normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(mod.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase())
+            )
           );
           dados = dadosFiltrados;
-          console.log(dados);
-          console.log(mod.toUpperCase());
-
-
-        }
-        );
+        });
         this.sharedDataService.setFilteredData(dados);
-
       } else {
         multiModulos.forEach((mod: any) => {
           let dadosFiltrados = dados.filter((cliente: any) =>
             cliente.dados.every(
-              (dado: any) => !dado.modulo.includes(mod.toUpperCase())
+              (dado: any) => !dado.modulo.normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(mod.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase())
             )
           );
           dados = dadosFiltrados;
-          console.log(dados);
-          console.log(mod.toUpperCase());
-
-
-        }
-        );
+        });
         this.sharedDataService.setFilteredData(dados);
       }
     } else {
-      // let dados: any = this.vp.dadosClientes;
-      // let dados: any = this.sharedDataService.getFilteredData();
       let dados: any = this.preArmazenado;
       if (this.contem === 'true') {
         let dadosFiltrados = dados.filter((cliente: any) =>
           cliente.dados.some((dado: any) =>
-            dado.modulo.includes(this.modulo.toUpperCase())
+            dado.modulo.normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(this.modulo.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase())
           )
         );
         this.sharedDataService.setFilteredData(dadosFiltrados);
       } else {
         let dadosFiltrados = dados.filter((cliente: any) =>
           cliente.dados.every(
-            (dado: any) => !dado.modulo.includes(this.modulo.toUpperCase())
+            (dado: any) => !dado.modulo.normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(this.modulo.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase())
           )
         );
         this.sharedDataService.setFilteredData(dadosFiltrados);
