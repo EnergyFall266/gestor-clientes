@@ -21,6 +21,7 @@ interface dados {
 export class DadosClientesComponent {
   @Input() vp!: VP_BPM;
   clientes: clientes[] = [];
+  selectedCliente: any 
 
   constructor(private sharedDataService: SharedDataService) {}
 

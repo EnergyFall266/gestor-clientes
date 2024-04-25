@@ -4,6 +4,69 @@
   </div>
 
   <div>
+    <p-table [value]="clientes" dataKey="nome" [(selection)]="selectedCliente">
+     
+      <ng-template pTemplate="body" let-cliente let-expanded="expanded">
+        <tr>
+          <td>
+            <p-tableCheckbox [value]="cliente"></p-tableCheckbox>
+        </td>
+          <td>
+            <button
+              type="button"
+              pButton
+              pRipple
+              [pRowToggler]="cliente"
+              class="p-button-text p-button-rounded p-button-plain"
+              [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+            ></button>
+          </td>
+          <td>
+            {{ cliente.nome }}
+          </td>
+          <td>{{ cliente.gestor }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="rowexpansion" let-cliente>
+        <tr>
+          <td colspan="7">
+            <div class="p-3">
+              <p-table [value]="cliente.dados" dataKey="linhaDeProduto">
+                <ng-template pTemplate="header">
+                  <tr>
+                 
+                    <th pSortableColumn="linhaDeProduto">
+                      linha De Produto <p-sortIcon field="linhaDeProduto"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="modulo">
+                      Módulo <p-sortIcon field="modulo"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="familia">
+                      Família <p-sortIcon field="familia"></p-sortIcon>
+                    </th>
+                    
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-dados>
+                  <tr>
+                    <td>{{ dados.linhaDeProduto }}</td>
+                    <td>{{ dados.modulo }}</td>
+                    <td>{{ dados.familia }}</td>
+               
+                    
+                   
+                  </tr>
+                </ng-template>
+          
+              </p-table>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <!-- <div>
     <p-accordion [multiple]="true">
       <p-accordionTab
         header="{{ cliente.nome }} "
@@ -45,5 +108,5 @@
         </div>
       </p-accordionTab>
     </p-accordion>
-  </div>
+  </div> -->
 </div>
