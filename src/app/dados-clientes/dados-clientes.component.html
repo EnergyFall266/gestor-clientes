@@ -4,10 +4,20 @@
   </div>
 
   <div>
-    <p-table [value]="clientes" dataKey="nome" [(selection)]="selectedCliente">
-     
-      <ng-template pTemplate="body" let-cliente let-expanded="expanded">
+    <p-table [value]="clientes" dataKey="nome" [(selection)]="vp.selectedCliente" styleClass="teste">
+      <ng-template pTemplate="header" >
         <tr>
+          <th  style="border-radius: 20px; opacity: 1; background-color: transparent;">
+            <p-tableHeaderCheckbox ></p-tableHeaderCheckbox>
+          </th>
+          <!-- <th></th>
+          <th ></th>
+          <th></th> -->
+        </tr>
+      </ng-template>
+     
+      <ng-template pTemplate="body" let-cliente let-expanded="expanded" >
+        <tr style="background-color: #0169b4; color: white; font-weight: bold; " class="border-circle">
           <td>
             <p-tableCheckbox [value]="cliente"></p-tableCheckbox>
         </td>

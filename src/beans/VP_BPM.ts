@@ -34,7 +34,7 @@ export class VP_BPM {
   public overlay: boolean = true;
   public Buscando_WS: boolean = true;
   public dadosClientes: dadosClientes[] = [];
-
+  public selectedCliente: any = [];
   public alertas: Message[] = [];
 
   public token: string = '';

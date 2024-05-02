@@ -242,7 +242,18 @@ export class SidebarComponent {
   }
 
   exportar() {
-    let data = this.sharedDataService.getFilteredData();
+    console.log(this.vp.selectedCliente);
+    
+    if (this.vp.selectedCliente.length === 0) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Aviso',
+        detail: 'Nenhum dado selecionado',
+        life: 3000,
+      });
+      return;
+    }
+    let data = this.vp.selectedCliente;
     this.exporta = [];
     data.forEach((cliente: any) => {
       cliente.dados.forEach((dado: any) => {
@@ -275,10 +286,12 @@ export class SidebarComponent {
         this.clienteSelecionado = '';
         this.modulo = '';
         this.vp.Buscando_WS = false;
+        this.vp.selectedCliente = [];
       }, 1000);
     } else {
       setTimeout(() => {
         this.vp.Buscando_WS = false;
+        this.vp.selectedCliente = []
       }, 1000);
     }
   }
