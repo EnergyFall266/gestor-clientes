@@ -1,16 +1,14 @@
 :host ::ng-deep {
-  
-  &.p-datatable .p-datatable-thead > tr > th {
+  .p-datatable .p-datatable-thead > tr > th {
     background-color: #0169b4;
     opacity: 0.85;
     border: 0;
     color: white;
-    
   }
-  &.p-datatable .p-sortable-column .p-sortable-column-icon {
+  .p-datatable .p-sortable-column .p-sortable-column-icon {
     color: white;
   }
-
+ 
   .p-datatable .p-datatable-tbody > tr > td:first-child {
     border-radius: 15px 0 0 15px !important;
   }
@@ -32,4 +30,3 @@
   opacity: 0.85;
   color: white;
 }
-
