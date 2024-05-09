@@ -64,7 +64,7 @@ export class SidebarComponent {
   ) {
     this.appService.acao$.subscribe((retorno) => {
       if (retorno) {
-        if (retorno === 'Everson Godoy Freire' || retorno === 'Ivan Carlos Vanin') {
+        if (retorno === 'Everson Godoy Freire') {
           this.adm = true;
         }
       } else {
