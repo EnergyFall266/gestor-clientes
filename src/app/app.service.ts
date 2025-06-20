@@ -27,7 +27,10 @@ export class AppService {
         this.token = retorno;
 
         const user = this.token.fullName.split('+');
-        let name = user[0] + ' ' + user[1] + ' ' + user[2];
+
+        let name = user.join(' ');
+
+        // let name = user[0] + ' ' + user[1] + ' ' + user[2];
 
         this.capturaAcao.next(name);
       })
