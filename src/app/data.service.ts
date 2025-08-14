@@ -44,7 +44,7 @@ export class DataService {
           headers: {
             Authorization:
               'Bearer colLMo9Dmbks12goOcUQQlqZJtZ51JABSB6CdTGKktDFwwRgDZejk65wp5SwIYGihMDHMJHay1HUkMyp8SZ7FS3v7oXV9t877Dmtw9LC15jigQ8AdCRhHjF2AoOXABxFkzliXfF5ZGh6eU0Yk2k1zSwScf0gbTc1H50zXKeTsjW15pPLjaphuvHi5ROBK54PDz89Pv7wjBaAjlouyr1DZGIWBqqxiWPI0',
-            ...data.getHeaders(),
+
           },
         }
       );

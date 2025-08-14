@@ -17,11 +17,12 @@ interface dados {
 }
 
 interface exporta {
-  nome: string;
-  gestor: string;
-  linhaDeProduto: string;
-  modulo: string;
-  familia: string;
+  Cliente: string;
+  Codigo: string;
+  Gestor: string;
+  LinhaDeProduto: string;
+  Modulo: string;
+  Familia: string;
 }
 
 @Component({
@@ -65,7 +66,7 @@ export class SidebarComponent {
     this.appService.acao$.subscribe((retorno) => {
       if (retorno) {
 
-        if (retorno === 'Everson Godoy Freire' || retorno === 'Andressa de Branco Silva' || retorno === 'Leonardo Vanzin') {
+        if (retorno === 'EversonGodoyFreire' || retorno === 'AndressadeBrancoSilva' || retorno === 'LeonardoVanzin') {
           this.adm = true;
         }
         this.getData();
@@ -82,12 +83,14 @@ export class SidebarComponent {
 
   async getData() {
     let data = await this.dataService.getData();
+    console.log(data.clientes);
 
-    data.Clientes.forEach((cliente: any) => {
-      const index = cliente.nome.indexOf('-');
 
-      let codigoCliente = cliente.nome.substring(0, index).trimEnd();
-      let nomeCliente = cliente.nome.substring(index + 1).trimStart();
+    data.clientes.forEach((cliente: any) => {
+      // const index = cliente.nome.indexOf('-');
+
+      let codigoCliente = cliente.codigo
+      let nomeCliente = cliente.nome
 
       //conteudo dos dropdowns
 
@@ -96,16 +99,16 @@ export class SidebarComponent {
       }
 
       if (!this.clientes.includes(cliente.nome)) {
-        this.clientes.push({ nome: nomeCliente });
+        this.clientes.push({ nome: cliente.nome });
       }
       //
 
       this.dados = [];
-      cliente.dados.forEach((dado: any) => {
+      cliente.modulos.forEach((modulos: any) => {
         this.dados.push({
-          linhaDeProduto: dado.linhaDeProduto,
-          modulo: dado.modulo,
-          familia: dado.familia,
+          linhaDeProduto: modulos.linhaDeProduto,
+          modulo: modulos.modulo,
+          familia: modulos.familia,
         });
       });
 
@@ -122,6 +125,8 @@ export class SidebarComponent {
   async onUpload(event: any) {
     this.loading = true;
     this.vp.Buscando_WS = true;
+    console.log(event.files[0]);
+
 
     let send = await this.dataService.sendFile(event.files[0]);
     if (send.status === 200) {
@@ -303,18 +308,19 @@ export class SidebarComponent {
     data.forEach((cliente: any) => {
       cliente.dados.forEach((dado: any) => {
         this.exporta.push({
-          nome: cliente.nome,
-          gestor: cliente.gestor,
-          linhaDeProduto: dado.linhaDeProduto,
-          modulo: dado.modulo,
-          familia: dado.familia,
+          Gestor: cliente.gestor,
+          Codigo: cliente.codigo,
+          Cliente: cliente.nome,
+          Familia: dado.familia,
+          LinhaDeProduto: dado.linhaDeProduto,
+          Modulo: dado.modulo,
         });
       });
     });
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.exporta);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Dados');
-    XLSX.writeFile(wb, 'dados.xlsx');
+    XLSX.writeFile(wb, 'modulos.xlsx');
   }
 
   vazio() {
