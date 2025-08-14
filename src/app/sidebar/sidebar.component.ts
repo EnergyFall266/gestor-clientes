@@ -64,7 +64,8 @@ export class SidebarComponent {
   ) {
     this.appService.acao$.subscribe((retorno) => {
       if (retorno) {
-        if (retorno === 'EversonGodoyFreire' || retorno === 'LeonardoVanzin') {
+
+        if (retorno === 'Everson Godoy Freire' || retorno === 'Andressa de Branco Silva' || retorno === 'Leonardo Vanzin') {
           this.adm = true;
         }
         this.getData();
@@ -197,6 +198,7 @@ export class SidebarComponent {
       return;
     }
     this.vp.Buscando_WS = true;
+
 
     if (this.modulo.includes(';')) {
       let multiModulos: any[] = this.modulo

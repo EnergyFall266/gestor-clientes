@@ -13,7 +13,10 @@ export class DataService {
       method: 'get',
       maxBodyLength: Infinity,
       url: 'https://demonstra.prismainformatica.com.br:3001/dados-clientes',
-      headers: {},
+      headers: {
+        Authorization:
+          'Bearer colLMo9Dmbks12goOcUQQlqZJtZ51JABSB6CdTGKktDFwwRgDZejk65wp5SwIYGihMDHMJHay1HUkMyp8SZ7FS3v7oXV9t877Dmtw9LC15jigQ8AdCRhHjF2AoOXABxFkzliXfF5ZGh6eU0Yk2k1zSwScf0gbTc1H50zXKeTsjW15pPLjaphuvHi5ROBK54PDz89Pv7wjBaAjlouyr1DZGIWBqqxiWPI0',
+      },
     };
 
     try {
@@ -34,9 +37,16 @@ export class DataService {
     data.append('planilha', file);
 
     try {
-      const response = axios.post(
+      const response = await axios.post(
         'https://demonstra.prismainformatica.com.br:3001/upload',
-        data
+        data,
+        {
+          headers: {
+            Authorization:
+              'Bearer colLMo9Dmbks12goOcUQQlqZJtZ51JABSB6CdTGKktDFwwRgDZejk65wp5SwIYGihMDHMJHay1HUkMyp8SZ7FS3v7oXV9t877Dmtw9LC15jigQ8AdCRhHjF2AoOXABxFkzliXfF5ZGh6eU0Yk2k1zSwScf0gbTc1H50zXKeTsjW15pPLjaphuvHi5ROBK54PDz89Pv7wjBaAjlouyr1DZGIWBqqxiWPI0',
+            ...data.getHeaders(),
+          },
+        }
       );
 
       return response;
