@@ -10,6 +10,7 @@ export interface ResponseLoadData {
 }
 
 interface dadosClientes {
+  codigo: string;
   nome: string;
   gestor: string;
   dados: dados[];

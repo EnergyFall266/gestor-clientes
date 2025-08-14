@@ -52,7 +52,7 @@ export class SidebarComponent {
   ngOnInit() {
     this.vp.Buscando_WS = true;
 
-    this.getData();
+
   }
 
   constructor(
@@ -64,9 +64,10 @@ export class SidebarComponent {
   ) {
     this.appService.acao$.subscribe((retorno) => {
       if (retorno) {
-        if (retorno === 'Everson Godoy Freire') {
+        if (retorno === 'EversonGodoyFreire' || retorno === 'LeonardoVanzin') {
           this.adm = true;
         }
+        this.getData();
       } else {
         this.messageService.clear();
         this.messageService.add({
@@ -82,13 +83,21 @@ export class SidebarComponent {
     let data = await this.dataService.getData();
 
     data.Clientes.forEach((cliente: any) => {
+      const index = cliente.nome.indexOf('-');
+
+      let codigoCliente = cliente.nome.substring(0, index).trimEnd();
+      let nomeCliente = cliente.nome.substring(index + 1).trimStart();
+
+      //conteudo dos dropdowns
+
       if (!this.gestores.includes(cliente.gestor)) {
         this.gestores.push(cliente.gestor);
       }
 
       if (!this.clientes.includes(cliente.nome)) {
-        this.clientes.push({ nome: cliente.nome });
+        this.clientes.push({ nome: nomeCliente });
       }
+      //
 
       this.dados = [];
       cliente.dados.forEach((dado: any) => {
@@ -100,7 +109,8 @@ export class SidebarComponent {
       });
 
       this.vp.dadosClientes.push({
-        nome: cliente.nome,
+        codigo: codigoCliente,
+        nome: nomeCliente,
         gestor: cliente.gestor,
         dados: this.dados,
       });
@@ -187,7 +197,6 @@ export class SidebarComponent {
       return;
     }
     this.vp.Buscando_WS = true;
-    
 
     if (this.modulo.includes(';')) {
       let multiModulos: any[] = this.modulo
@@ -198,7 +207,15 @@ export class SidebarComponent {
         multiModulos.forEach((mod: any) => {
           let dadosFiltrados = dados.filter((cliente: any) =>
             cliente.dados.some((dado: any) =>
-              dado.modulo.normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(mod.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase())
+              dado.modulo
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .includes(
+                  mod
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '')
+                    .toUpperCase()
+                )
             )
           );
           dados = dadosFiltrados;
@@ -208,7 +225,16 @@ export class SidebarComponent {
         multiModulos.forEach((mod: any) => {
           let dadosFiltrados = dados.filter((cliente: any) =>
             cliente.dados.every(
-              (dado: any) => !dado.modulo.normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(mod.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase())
+              (dado: any) =>
+                !dado.modulo
+                  .normalize('NFD')
+                  .replace(/[\u0300-\u036f]/g, '')
+                  .includes(
+                    mod
+                      .normalize('NFD')
+                      .replace(/[\u0300-\u036f]/g, '')
+                      .toUpperCase()
+                  )
             )
           );
           dados = dadosFiltrados;
@@ -220,14 +246,31 @@ export class SidebarComponent {
       if (this.contem === 'true') {
         let dadosFiltrados = dados.filter((cliente: any) =>
           cliente.dados.some((dado: any) =>
-            dado.modulo.normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(this.modulo.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase())
+            dado.modulo
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '')
+              .includes(
+                this.modulo
+                  .normalize('NFD')
+                  .replace(/[\u0300-\u036f]/g, '')
+                  .toUpperCase()
+              )
           )
         );
         this.sharedDataService.setFilteredData(dadosFiltrados);
       } else {
         let dadosFiltrados = dados.filter((cliente: any) =>
           cliente.dados.every(
-            (dado: any) => !dado.modulo.normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(this.modulo.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase())
+            (dado: any) =>
+              !dado.modulo
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .includes(
+                  this.modulo
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '')
+                    .toUpperCase()
+                )
           )
         );
         this.sharedDataService.setFilteredData(dadosFiltrados);
@@ -243,7 +286,7 @@ export class SidebarComponent {
 
   exportar() {
     console.log(this.vp.selectedCliente);
-    
+
     if (this.vp.selectedCliente.length === 0) {
       this.messageService.add({
         severity: 'error',
@@ -291,7 +334,7 @@ export class SidebarComponent {
     } else {
       setTimeout(() => {
         this.vp.Buscando_WS = false;
-        this.vp.selectedCliente = []
+        this.vp.selectedCliente = [];
       }, 1000);
     }
   }

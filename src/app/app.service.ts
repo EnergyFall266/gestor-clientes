@@ -27,9 +27,25 @@ export class AppService {
         this.token = retorno;
 
         const user = this.token.fullName.split('+');
-        let name = user[0] + ' ' + user[1] + ' ' + user[2];
-
+        console.log(user);
+        let name=''
+        for(let i=0; i < user.length; i++){
+name += user[i]
+        }
+        console.log(name);
         this.capturaAcao.next(name);
+
+        // if (user.length === 3) {
+        //   let name = user[0] + ' ' + user[1] + ' ' + user[2];
+        //   this.capturaAcao.next(name);
+        //   console.log(name);
+
+        // } else if (user.length === 2) {
+        //   // let name = user[0] + ' ' + user[1];
+        //   // console.log(name);
+
+        //   // this.capturaAcao.next(name);
+        // }
       })
       .catch((error) => {
         alert(

@@ -25,7 +25,7 @@ export class AppComponent {
   @ViewChild(Messages) msg!: Messages;
   public title = 'Gestor-Clientes';
 
-  
+
 
   public vp: VP_BPM = new VP_BPM();
 
@@ -35,8 +35,8 @@ export class AppComponent {
   }
   ngOnInit() {
 
-  
+
   }
 
- 
+
 }

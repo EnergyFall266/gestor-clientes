@@ -3,6 +3,7 @@ import { VP_BPM } from 'src/beans/VP_BPM';
 import { SharedDataService } from '../shared-data.service';
 
 interface clientes {
+  codigo: string;
   nome: string;
   gestor: string;
   dados: dados[];
