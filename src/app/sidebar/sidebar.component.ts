@@ -83,7 +83,7 @@ export class SidebarComponent {
 
   async getData() {
     let data = await this.dataService.getData();
-    console.log(data.clientes);
+
 
 
     data.clientes.forEach((cliente: any) => {
@@ -125,7 +125,7 @@ export class SidebarComponent {
   async onUpload(event: any) {
     this.loading = true;
     this.vp.Buscando_WS = true;
-    console.log(event.files[0]);
+
 
 
     let send = await this.dataService.sendFile(event.files[0]);
@@ -292,7 +292,7 @@ export class SidebarComponent {
   }
 
   exportar() {
-    console.log(this.vp.selectedCliente);
+    // console.log(this.vp.selectedCliente);
 
     if (this.vp.selectedCliente.length === 0) {
       this.messageService.add({

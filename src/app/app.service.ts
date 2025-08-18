@@ -27,12 +27,12 @@ export class AppService {
         this.token = retorno;
 
         const user = this.token.fullName.split('+');
-        console.log(user);
+        // console.log(user);
         let name=''
         for(let i=0; i < user.length; i++){
 name += user[i]
         }
-        console.log(name);
+        // console.log(name);
         this.capturaAcao.next(name);
 
         // if (user.length === 3) {
