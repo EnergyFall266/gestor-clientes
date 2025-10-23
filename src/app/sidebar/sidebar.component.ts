@@ -52,8 +52,6 @@ export class SidebarComponent {
 
   ngOnInit() {
     this.vp.Buscando_WS = true;
-
-
   }
 
   constructor(
@@ -65,8 +63,7 @@ export class SidebarComponent {
   ) {
     this.appService.acao$.subscribe((retorno) => {
       if (retorno) {
-
-        if (retorno === 'EversonGodoyFreire' || retorno === 'AndressadeBrancoSilva' || retorno === 'LeonardoVanzin') {
+        if (retorno === 'EversonGodoyFreire' || retorno === 'LeonardoVanzin') {
           this.adm = true;
         }
         this.getData();
@@ -84,13 +81,11 @@ export class SidebarComponent {
   async getData() {
     let data = await this.dataService.getData();
 
-
-
     data.clientes.forEach((cliente: any) => {
       // const index = cliente.nome.indexOf('-');
 
-      let codigoCliente = cliente.codigo
-      let nomeCliente = cliente.nome
+      let codigoCliente = cliente.codigo;
+      let nomeCliente = cliente.nome;
 
       //conteudo dos dropdowns
 
@@ -125,8 +120,6 @@ export class SidebarComponent {
   async onUpload(event: any) {
     this.loading = true;
     this.vp.Buscando_WS = true;
-
-
 
     let send = await this.dataService.sendFile(event.files[0]);
     if (send.status === 200) {
@@ -197,6 +190,7 @@ export class SidebarComponent {
   pesquisaModulo() {
     if (this.preArmazenado.length === 0) {
       this.preArmazenado = this.sharedDataService.getFilteredData();
+      console.log(this.preArmazenado);
     }
 
     if (this.modulo === '') {
@@ -204,80 +198,92 @@ export class SidebarComponent {
     }
     this.vp.Buscando_WS = true;
 
-
     if (this.modulo.includes(';')) {
       let multiModulos: any[] = this.modulo
         .split(';')
         .map((part) => part.trim());
       let dados: any = this.preArmazenado;
       if (this.contem === 'true') {
+        console.log('contem');
+        console.log('multi', multiModulos);
+
         multiModulos.forEach((mod: any) => {
           let dadosFiltrados = dados.filter((cliente: any) =>
-            cliente.dados.some((dado: any) =>
-              dado.modulo
+            cliente.dados.some((dado: any) => {
+              return dado.modulo
                 .normalize('NFD')
                 .replace(/[\u0300-\u036f]/g, '')
+                .toUpperCase()
                 .includes(
                   mod
                     .normalize('NFD')
                     .replace(/[\u0300-\u036f]/g, '')
                     .toUpperCase()
-                )
-            )
+                );
+            })
           );
           dados = dadosFiltrados;
         });
         this.sharedDataService.setFilteredData(dados);
       } else {
         multiModulos.forEach((mod: any) => {
-          let dadosFiltrados = dados.filter((cliente: any) =>
-            cliente.dados.every(
+          let dadosFiltrados = dados.filter((cliente: any) => {
+            return cliente.dados.every(
               (dado: any) =>
                 !dado.modulo
                   .normalize('NFD')
                   .replace(/[\u0300-\u036f]/g, '')
+                  .toUpperCase()
                   .includes(
                     mod
                       .normalize('NFD')
                       .replace(/[\u0300-\u036f]/g, '')
                       .toUpperCase()
                   )
-            )
-          );
+            );
+          });
           dados = dadosFiltrados;
         });
         this.sharedDataService.setFilteredData(dados);
       }
     } else {
       let dados: any = this.preArmazenado;
+      console.log('dados', dados);
+
       if (this.contem === 'true') {
-        let dadosFiltrados = dados.filter((cliente: any) =>
-          cliente.dados.some((dado: any) =>
+        console.log('contem');
+        console.log('modulo', this.modulo);
+
+        let dadosFiltrados = dados.filter((cliente: any) => {
+          return cliente.dados.some((dado: any) =>
             dado.modulo
               .normalize('NFD')
               .replace(/[\u0300-\u036f]/g, '')
+              .toUpperCase()
               .includes(
                 this.modulo
                   .normalize('NFD')
                   .replace(/[\u0300-\u036f]/g, '')
                   .toUpperCase()
               )
-          )
-        );
+          );
+        });
+        console.log('filtrado', dadosFiltrados);
+
         this.sharedDataService.setFilteredData(dadosFiltrados);
       } else {
         let dadosFiltrados = dados.filter((cliente: any) =>
           cliente.dados.every(
-            (dado: any) =>
-              !dado.modulo
+            (dado: any) =>{
+              return !dado.modulo
                 .normalize('NFD')
-                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/[\u0300-\u036f]/g, '').toUpperCase()
                 .includes(
                   this.modulo
                     .normalize('NFD')
                     .replace(/[\u0300-\u036f]/g, '')
                     .toUpperCase()
-                )
+                )}
           )
         );
         this.sharedDataService.setFilteredData(dadosFiltrados);
